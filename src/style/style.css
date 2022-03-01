@@ -1,13 +1,15 @@
 body{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    background-color: darkgreen;
+    background-color: #0C84E8;
+    background: linear-gradient(to left, #0C84E8, #E5D34F, #0D9B04);
 }
 
 .htext{
     transition: 0.7s;
+    color: #0D9B04;
     text-decoration: underline;
 }
 
 .htext:hover{
-    color: darkgreen;
+    color: #0C84E8;
 }
