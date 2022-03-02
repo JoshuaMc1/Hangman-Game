@@ -21,44 +21,49 @@
         <div class="m-4 bg-light rounded-3 shadow">
             <div class="row m-0 vh-70 justify-content-center align-content-center g-2 p-3">
                 <div class="col-lg-12 text-center mb-3">
-                    <h2 class="htext"><strong>HANGMAN <i class="fas fa-skull-crossbones"></i> GAME</strong></h2>
+                    <h2 class="htext fw-bold">HANGMAN <i class="fas fa-skull-crossbones"></i> GAME</h2>
                 </div>
                 <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-lg-4 mb-3">
+                    <div class="row rec justify-content-center" id="parte1">
+                        <div class="col-lg-4">
                             <div class="mb-3 row">
-                                <label for="nUsuario" class="col-sm-3 col-form-label"><strong>Nombre:</strong></label>
+                                <label for="nUsuario" class="col-sm-3 col-form-label fw-bold">Nombre:</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="nUsuario">
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-5 mb-3">
+                        <div class="col-lg-5">
                             <div class="mb-3 row">
-                                <label for="nUsuario"
-                                    class="col-sm-3 col-form-label"><strong>Dificultad:</strong></label>
+                                <label for="nUsuario" class="col-sm-3 col-form-label fw-bold">Dificultad:</label>
                                 <div class="col-sm-9">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Seleccione una opción</option>
-                                        <option value="1">Facil</option>
-                                        <option value="2">Dificil</option>
+                                    <select class="form-select" aria-label="Default select example" id="dificultad">
+                                        <option value="">Seleccione una opción</option>
+                                        <option value="facil">Facil</option>
+                                        <option value="dificil">Dificil</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 mb-3">
+                        <div class="col-lg-3">
                             <div class="d-grid">
-                                <button class="btn btn-outline-success rounded"><i class="fas fa-play"></i> Inciar
+                                <button class="btn btn-outline-success rounded" id="btnIniciar"><i class="fas fa-play"></i> Inciar
                                     juego</button>
                             </div>
                         </div>
-                        <div class="col-lg-12 mb-4">
+                    </div>
+                    <div class="row rec ocultar" id="parte2">
+                        <div class="col-lg-12 mb-4 d-none" id="opcs">
                             <div class="d-grid">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Mostrar Graficas</button>
-                                    <button type="button" class="btn btn-outline-danger">Abandonar Partida</button>
+                                    <!-- Boton para abrir el modal -->
+                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal">Mostrar Graficas</button>
+                                    <!-- Boton para abandonar partida -->
+                                    <button type="button" class="btn btn-outline-danger" id="btnAbandonar">Abandonar Partida</button>
                                 </div>
                             </div>
+                            <!-- Este es el modal donde se mostraran las graficas-->
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
@@ -69,20 +74,52 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            ...
+                                            <!-- Este es el cuerpo del modal, aqui van a ir las graficas-->
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-12 mb-2 text-lg-end text-center">
+                            <!-- ASIGNARLES UN ID A LOS SPAN Y ASI PODER LLEVAR EL CONTROL DE OPORTUNIDADES Y PUNTOS-->
+                            <span class="fw-bold">Usuario: <span class="fw-bold" id="nombre"></span></span> |
+                            <span class="fw-bold">Oportunidades: <span class="fw-bold" id="oportunidad"></span></span> |
+                            <span class="fw-bold">Puntos: <span class="fw-bold" id="puntos"></span></span>
+                        </div>
                         <div class="col-lg-12 mb-2">
-                            <span>Oportunidades: 3</span>
-                            <span>Puntos: 0</span>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <h3 class="htext">Pistas</h3>
+                                    <!-- AQUI SE AGREGARAN LAS PISTAS DE FORMA DINAMICA CON JAVASCRIPT-->
+                                    <p class="text-break fs-1" id="pista">Aun no hay pistas!</p>
+                                </div>
+                                <div class="col-lg-7 text-center">
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- COLOCAR UN ID AL IMG PARA PODER CAMBIAR LA IMAGEN DESDE JAVASCRIPT-->
+                                            <img src="src/img/ahorcado0.png" class="img-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h3 id="frase">_ _ _ _ _ _ _
+                                                <!-- AQUI SE VA A LLENAR DEPENDIENDO DE LA PALABRA QUE TOQUE-->
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="container">
+                                        <!-- AQUI VA EL TECLADO -->
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script src="src/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"

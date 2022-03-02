@@ -13,3 +13,11 @@ body{
 .htext:hover{
     color: #0C84E8;
 }
+
+.rec{
+    transition: all .8s;
+}
+
+.ocultar{
+    opacity: 0;
+}
