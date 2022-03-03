@@ -2,6 +2,7 @@ body{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background-color: #0C84E8;
     background: linear-gradient(to left, #0C84E8, #E5D34F, #0D9B04);
+    
 }
 
 .htext{
@@ -20,4 +21,102 @@ body{
 
 .ocultar{
     opacity: 0;
+}
+
+.tex{
+    text-align: center;  
+}
+
+h1{
+    text-align: center;
+     
+     
+    color: #0f420b;
+    font-family: 'Aclonica', sans-serif;
+    font-family: 'Balsamiq Sans', cursive;
+    font-family: 'Coustard', serif;
+    font-family: 'Lobster', cursive;
+    font-family: 'Tenor Sans', sans-serif;
+    display: inline-block;
+    position: relative;
+
+}
+
+h1::after, h1::before{
+
+    content: '';
+    position: absolute;
+    width: 128px;
+    height: 10px;
+    background-color: #E5D34F;
+    top: 0.6em;
+
+}
+
+h1::before{
+
+    left: -140px;
+
+}
+
+h1::after{
+
+    right: -140px;
+
+}
+
+
+
+
+.contenedor{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:550px;
+}
+
+.Panel{
+
+    display: grid;
+    grid-template-columns: repeat(10, 75px);
+    grid-template-rows: repeat(5,75px);
+    background-color: #0D9B04;
+    padding: 23px;
+    height: 270px;
+    border-radius: 32px;
+    box-shadow: 5px 5px 0px 5px #2d597e;
+
+}
+.teclas{
+    display: grid;
+    grid-template-columns: repeat(3, 3px);
+    grid-template-rows: repeat(5,75px);
+
+}
+
+.letras{
+
+    cursor: pointer;
+    margin: 5px;
+    padding: 0;
+    border-radius: 32px;
+    font-size: 1.5em;
+    border: none;
+    background-color: #0D9B04;
+    box-shadow: 5px 5px 10px -3px #000, -5px -5px 15px 3px #E5D34F;
+}
+
+.letras:active{
+
+    background-color: rgb(32, 34, 122);
+}
+
+.letras:focus{
+  outline: none;
+  font-family: 'Aclonica', sans-serif;
+  font-family: 'Balsamiq Sans', cursive;
+  font-family: 'Coustard', serif;
+  font-family: 'Lobster', cursive;
+  font-family: 'Tenor Sans', sans-serif;
 }

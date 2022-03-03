@@ -25,3 +25,7 @@ $("#btnAbandonar").click(function () {
     $("#parte2").addClass("ocultar");
     $("#opcs").addClass("d-none");
 });
+
+    
+
+    
