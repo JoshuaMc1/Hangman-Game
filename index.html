@@ -10,14 +10,11 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-    <link rel="stylesheet" href="src/style/style.css">
     <link rel="icon" type="image/png" sizes="96x96" href="src/img/favicon-96x96.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Aclonica&family=Balsamiq+Sans:wght@400;700&family=Coustard:wght@900&family=Lobster&family=Tenor+Sans&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Balsamiq+Sans:wght@400;700&family=Coustard:wght@900&family=Lobster&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/style/style.css">
     <title>Hangman Game</title>
 </head>
 
@@ -86,7 +83,6 @@
                                     <!-- Boton para abandonar partida -->
                                     <button type="button" class="btn btn-outline-danger" id="btnAbandonar">Abandonar
                                         Partida</button>
-
                                 </div>
                             </div>
                             <!-- Este es el modal donde se mostraran las graficas-->
@@ -114,10 +110,9 @@
                         </div>
                         <div class="col-lg-12 mb-2">
                             <div class="row">
-
                                 <!--<div class="col-lg-5">
                                     <h3 class="htext">Pistas</h3>
-                                     AQUI SE AGREGARAN LAS PISTAS DE FORMA DINAMICA CON JAVASCRIPT
+                                    AQUI SE AGREGARAN LAS PISTAS DE FORMA DINAMICA CON JAVASCRIPT
                                     <p class="text-break fs-1" id="pista">Aun no hay pistas!</p>
                                 </div>
                                 -->
@@ -131,9 +126,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-
                                             <!-- AQUI SE VA A LLENAR DEPENDIENDO DE LA PALABRA QUE TOQUE-->
-
                                             <div class="container my-2 w-25">
                                                 <div id="resultado"
                                                     class="row justify-content-center  contenedor-letras-secreto">
@@ -145,34 +138,14 @@
                                                 <div id="historial"
                                                     class="row align-content-center justify-content-center borde-morado rounded-bottom contenedor-letras">
                                                 </div>
-
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="container">
-                                        <!-- AQUI VA EL TECLADO 
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-                                        <br>
-
-                                        <div  class="tex">
-                                            <h1 class="lines-effect" > El juego del ahorcado</h1>
-                                        </div>
-                                        -->
-
-
                                         <div class="contenedor">
                                             <div class="Panel" id="tecladoD">
-                                                <div class="teclas">
-                                                    <div class="display"></div>
-                                                </div>
-
                                                 <button data-id="q" class="letras">Q</button>
                                                 <button data-id="w" class="letras teclado">W</button>
                                                 <button data-id="e" class="letras teclado">E</button>
@@ -199,7 +172,6 @@
                                                 <button data-id="b" class="letras teclado">B</button>
                                                 <button data-id="n" class="letras teclado">N</button>
                                                 <button data-id="m" class="letras teclado">M</button>
-
                                             </div>
                                         </div>
                                     </div>
@@ -212,9 +184,6 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="src/js/script.js"></script>
-
-    <script src="src/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
         crossorigin="anonymous"></script>
@@ -224,7 +193,8 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
-
+    <script src="src/js/script.js"></script>
+    <script src="src/js/app.js"></script>
 </body>
 
 </html>

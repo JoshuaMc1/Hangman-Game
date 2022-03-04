@@ -1,16 +1,13 @@
 var usuario = "";
 $("#jugar").click(function () { 
     if(verificar($("#nombre")) == false){
-        
-    }else if(verificar($("#dificultad")) == false){
-        
+    }else if(verificar($("#dificultad")) == false){    
     }else{
         usuario = $("#nombre").val();
         $("#agregar").addClass("ocultar");
         $("#parte2").removeClass("ocultar");
         $("#opcs").removeClass("d-none");
         $("#nombreUsuario").html(usuario);
-        
     }
 
     function verificar(objeto){
@@ -24,9 +21,3 @@ $("#btnAbandonar").click(function () {
     $("#parte2").addClass("ocultar");
     $("#opcs").addClass("d-none");
 });
-
-
-
-    
-
-    

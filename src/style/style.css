@@ -29,8 +29,6 @@ body{
 
 h1{
     text-align: center;
-     
-     
     color: #0f420b;
     font-family: 'Aclonica', sans-serif;
     font-family: 'Balsamiq Sans', cursive;
@@ -43,7 +41,6 @@ h1{
 }
 
 h1::after, h1::before{
-
     content: '';
     position: absolute;
     width: 128px;
@@ -54,22 +51,14 @@ h1::after, h1::before{
 }
 
 h1::before{
-
     left: -140px;
-
 }
 
 h1::after{
-
     right: -140px;
-
 }
 
-
-
-
 .contenedor{
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,48 +66,45 @@ h1::after{
 }
 
 .Panel{
-
     display: grid;
     grid-template-columns: repeat(10, 75px);
     grid-template-rows: repeat(5,75px);
+    background: linear-gradient(to left, #0C84E8, #E5D34F, #0D9B04);
     background-color: #0D9B04;
     padding: 23px;
     height: 270px;
     border-radius: 32px;
-    box-shadow: 5px 5px 0px 5px #2d597e;
-
+    box-shadow: 5px 5px 0px 5px #0C84E8;
 }
+
 .teclas{
     display: grid;
     grid-template-columns: repeat(3, 3px);
     grid-template-rows: repeat(5,75px);
-
 }
 
 .letras{
-
     cursor: pointer;
     margin: 5px;
     padding: 0;
     border-radius: 32px;
     font-size: 1.5em;
     border: none;
-    background-color: #0D9B04;
+    background-color: #FFFFFF;
     box-shadow: 5px 5px 10px -3px #000, -5px -5px 15px 3px #E5D34F;
 }
 
 .letras:active{
-
-    background-color: rgb(32, 34, 122);
+    background-color: rgb(100, 142, 153);
 }
 
 .letras:focus{
-  outline: none;
-  font-family: 'Aclonica', sans-serif;
-  font-family: 'Balsamiq Sans', cursive;
-  font-family: 'Coustard', serif;
-  font-family: 'Lobster', cursive;
-  font-family: 'Tenor Sans', sans-serif;
+    outline: none;
+    font-family: 'Aclonica', sans-serif;
+    font-family: 'Balsamiq Sans', cursive;
+    font-family: 'Coustard', serif;
+    font-family: 'Lobster', cursive;
+    font-family: 'Tenor Sans', sans-serif;
 }
 
 .contenedor-letras {
@@ -130,13 +116,14 @@ h1::after{
     
 }
 
-
 .bg-morado {
     background: #2d597e;
 }
+
 .bg-rojo{
     background: #0D9B04;
 }
+
 .borde-rojo{
     border: 1px solid #0D9B04;
 }
