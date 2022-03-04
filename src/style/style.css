@@ -163,3 +163,8 @@ h1::after{
 #datos {
     display: none;
   }
+
+  .grafico {
+    width: 328px;
+    height: 200px;
+  }
