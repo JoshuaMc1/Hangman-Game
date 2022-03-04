@@ -8,15 +8,16 @@
     <meta name="description" content="Juego de ahorcado, hecho por el grupo 5 de Programacion web 2">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="src/style/style.css">
-    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="src/img/favicon-96x96.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Balsamiq+Sans:wght@400;700&family=Coustard:wght@900&family=Lobster&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aclonica&family=Balsamiq+Sans:wght@400;700&family=Coustard:wght@900&family=Lobster&family=Tenor+Sans&display=swap"
+        rel="stylesheet">
     <title>Hangman Game</title>
 </head>
 
@@ -28,34 +29,49 @@
                     <h2 class="htext fw-bold">HANGMAN <i class="fas fa-skull-crossbones"></i> GAME</h2>
                 </div>
                 <div class="col-lg-12">
-                    <div class="row rec justify-content-center" id="parte1">
-                        <div class="col-lg-4">
+                    <form class="row rec justify-content-center" id="agregar">
+                        <div class="col-lg-3">
                             <div class="mb-3 row">
-                                <label for="nUsuario" class="col-sm-3 col-form-label fw-bold">Nombre:</label>
+                                <label class="col-sm-3 col-form-label fw-bold">Nombre:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="nUsuario">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="mb-3 row">
-                                <label for="nUsuario" class="col-sm-3 col-form-label fw-bold">Dificultad:</label>
-                                <div class="col-sm-9">
-                                    <select class="form-select" aria-label="Default select example" id="dificultad">
-                                        <option value="">Seleccione una opción</option>
-                                        <option value="facil">Facil</option>
-                                        <option value="dificil">Dificil</option>
-                                    </select>
+                                    <input type="text" class="form-control" id="nombre">
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label fw-bold">Tema:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" aria-label="Default select example" id="temas">
+                                        <option value="">Seleccione un tema</option>
+                                        <option value="1">Animales</option>
+                                        <option value="2">Frutas</option>
+                                        <option value="3">Colores</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3 row">
+                                <label class="col-sm-3 col-form-label fw-bold">Dificultad:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-select" aria-label="Default select example" id="dificultad">
+                                        <option value="">Seleccione la dificultad</option>
+                                        <option value="1">Facil</option>
+                                        <option value="2">Dificil</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
                             <div class="d-grid">
-                                <button class="btn btn-outline-success rounded" id="btnIniciar"><i class="fas fa-play"></i> Inciar
+                                <button class="btn btn-outline-success rounded agregar" id="jugar"><i
+                                        class="fas fa-play "></i> Inciar
                                     juego</button>
                             </div>
                         </div>
-                    </div>
+                        <div id="mensaje"> </div>
+                    </form>
                     <div class="row rec ocultar" id="parte2">
                         <div class="col-lg-12 mb-4 d-none" id="opcs">
                             <div class="d-grid">
@@ -63,8 +79,13 @@
                                     <!-- Boton para abrir el modal -->
                                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">Mostrar Graficas</button>
+                                    <!-- Boton para volver a jugar partida -->
+                                    <button type="button" class="btn btn-outline-success agregar" id="btnVolver">Volver a
+                                        Jugar</button>
                                     <!-- Boton para abandonar partida -->
-                                    <button type="button" class="btn btn-outline-danger" id="btnAbandonar">Abandonar Partida</button>
+                                    <button type="button" class="btn btn-outline-danger" id="btnAbandonar">Abandonar
+                                        Partida</button>
+
                                 </div>
                             </div>
                             <!-- Este es el modal donde se mostraran las graficas-->
@@ -84,37 +105,54 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 mb-2 text-lg-end text-center">
+                        <div class="col-lg-12 mb-2 text-lg-center text-center">
                             <!-- ASIGNARLES UN ID A LOS SPAN Y ASI PODER LLEVAR EL CONTROL DE OPORTUNIDADES Y PUNTOS-->
-                            <span class="fw-bold">Usuario: <span class="fw-bold" id="nombre"></span></span> |
-                            <span class="fw-bold">Oportunidades: <span class="fw-bold" id="oportunidad"></span></span> |
+                            <span class="fw-bold">Usuario: <span class="fw-bold" id="nombreUsuario"></span></span> |
+                            <span class="fw-bold">Oportunidades: <span class="fw-bold" id="intentos"></span></span> |
                             <span class="fw-bold">Puntos: <span class="fw-bold" id="puntos"></span></span>
                         </div>
                         <div class="col-lg-12 mb-2">
                             <div class="row">
-                                <div class="col-lg-5">
+
+                                <!--<div class="col-lg-5">
                                     <h3 class="htext">Pistas</h3>
-                                    <!-- AQUI SE AGREGARAN LAS PISTAS DE FORMA DINAMICA CON JAVASCRIPT-->
+                                     AQUI SE AGREGARAN LAS PISTAS DE FORMA DINAMICA CON JAVASCRIPT
                                     <p class="text-break fs-1" id="pista">Aun no hay pistas!</p>
                                 </div>
-                                <div class="col-lg-7 text-center">
+                                -->
+                                <div class="col-lg-12 text-center">
                                     <div class="row">
                                         <div class="col">
                                             <!-- COLOCAR UN ID AL IMG PARA PODER CAMBIAR LA IMAGEN DESDE JAVASCRIPT-->
-                                            <img src="src/img/ahorcado0.png" class="img-fluid">
+                                            <img id="imagen_ahorcado" src="src/img/ahorcado0.png" class="img-fluid"
+                                                alt="Imagen de ahorcado">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <h3 id="frase">_ _ _ _ _ _ _
-                                                <!-- AQUI SE VA A LLENAR DEPENDIENDO DE LA PALABRA QUE TOQUE-->
-                                            </h3>
+
+                                            <!-- AQUI SE VA A LLENAR DEPENDIENDO DE LA PALABRA QUE TOQUE-->
+
+                                            <div class="container my-2 w-25">
+                                                <div id="resultado"
+                                                    class="row justify-content-center  contenedor-letras-secreto">
+                                                </div>
+                                                <div class="row justify-content-center rounded-top mt-3 bg-morado text-white">
+                                                    Letras Fallidas
+                                                </div>
+                                                <div id="historial"
+                                                    class="row align-content-center justify-content-center borde-morado rounded-bottom contenedor-letras">
+                                                </div>
+                                               
+                                            </div>
+
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="container">
-                                        <!-- AQUI VA EL TECLADO -->
+                                        <!-- AQUI VA EL TECLADO 
                                         <br>
                                         <br>
                                         <br>
@@ -124,49 +162,56 @@
                                         <div  class="tex">
                                             <h1 class="lines-effect" > El juego del ahorcado</h1>
                                         </div>
-                                        
-                                   
+                                        -->
 
-                                  <div class="contenedor">
-                                      <div  class= "Panel">
-                                      <div class="teclas">
-                                      <div class="display"></div>
-                                  </div>
-                                 
-                                 
-                                  <button class="letras">Q</button>
-                                  <button class="letras">W</button>
-                                  <button class="letras">E</button>
-                                  <button class="letras">R</button>
-                                  <button class="letras">T</button>
-                                  <button class="letras">Y</button>
-                                  <button class="letras">U</button>
-                                  <button class="letras">I</button>
-                                  <button class="letras">O</button>
-                                  <button class="letras">P</button>
-                                  <button class="letras">A</button>
-                                  <button class="letras">S</button>
-                                  <button class="letras">D</button>
-                                  <button class="letras">F</button>
-                                  <button class="letras">G</button>
-                                  <button class="letras">H</button>
-                                  <button class="letras">J</button>
-                                  <button class="letras">K</button>
-                                  <button class="letras">L</button>
-                                  <button class="letras">Z</button>
-                                  <button class="letras">X</button>
-                                  <button class="letras">C</button>
-                                  <button class="letras">V</button>
-                                  <button class="letras">B</button>
-                                  <button class="letras">N</button>
-                                  <button class="letras">M</button>
-                                 
 
-                        
+                                        <div class="contenedor">
+                                            <div class="Panel" id="tecladoD">
+                                                <div class="teclas">
+                                                    <div class="display"></div>
+                                                </div>
 
+                                                <button data-id="q" class="letras">Q</button>
+                                                <button data-id="w" class="letras teclado">W</button>
+                                                <button data-id="e" class="letras teclado">E</button>
+                                                <button data-id="r" class="letras teclado">R</button>
+                                                <button data-id="t" class="letras teclado">T</button>
+                                                <button data-id="y" class="letras teclado">Y</button>
+                                                <button data-id="u" class="letras teclado">U</button>
+                                                <button data-id="i" class="letras teclado">I</button>
+                                                <button data-id="o" class="letras teclado">O</button>
+                                                <button data-id="p" class="letras teclado">P</button>
+                                                <button data-id="a" class="letras teclado">A</button>
+                                                <button data-id="s" class="letras teclado">S</button>
+                                                <button data-id="d" class="letras teclado">D</button>
+                                                <button data-id="f" class="letras teclado">F</button>
+                                                <button data-id="g" class="letras teclado">G</button>
+                                                <button data-id="h" class="letras teclado">H</button>
+                                                <button data-id="j" class="letras teclado">J</button>
+                                                <button data-id="k" class="letras teclado">K</button>
+                                                <button data-id="l" class="letras teclado">L</button>
+                                                <button data-id="z" class="letras teclado">Z</button>
+                                                <button data-id="x" class="letras teclado">X</button>
+                                                <button data-id="c" class="letras teclado">C</button>
+                                                <button data-id="v" class="letras teclado">V</button>
+                                                <button data-id="b" class="letras teclado">B</button>
+                                                <button data-id="n" class="letras teclado">N</button>
+                                                <button data-id="m" class="letras teclado">M</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="src/js/script.js"></script>
+
     <script src="src/js/app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
         integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
@@ -174,6 +219,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+    
 </body>
 
 </html>

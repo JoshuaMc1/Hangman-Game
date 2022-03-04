@@ -1,17 +1,16 @@
 var usuario = "";
-$("#btnIniciar").click(function () { 
-    if(verificar($("#nUsuario")) == false){
-        alert("Debe ingresar su nombre");
+$("#jugar").click(function () { 
+    if(verificar($("#nombre")) == false){
+        
     }else if(verificar($("#dificultad")) == false){
-        alert("Debe seleccionar la dificultad");
+        
     }else{
-        usuario = $("#nUsuario").val();
-        $("#parte1").addClass("ocultar");
+        usuario = $("#nombre").val();
+        $("#agregar").addClass("ocultar");
         $("#parte2").removeClass("ocultar");
         $("#opcs").removeClass("d-none");
-        $("#nombre").html(usuario);
-        $("#oportunidad").html("3");
-        $("#puntos").html("0");
+        $("#nombreUsuario").html(usuario);
+        
     }
 
     function verificar(objeto){
@@ -21,10 +20,12 @@ $("#btnIniciar").click(function () {
 });
 
 $("#btnAbandonar").click(function () { 
-    $("#parte1").removeClass("ocultar");
+    $("#agregar").removeClass("ocultar");
     $("#parte2").addClass("ocultar");
     $("#opcs").addClass("d-none");
 });
+
+
 
     
 
