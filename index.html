@@ -62,8 +62,8 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="d-grid">
-                                <button class="btn btn-outline-success rounded agregar" id="jugar"><i
-                                        class="fas fa-play "></i> Inciar
+                                <button class="btn btn-outline-success rounded agregar agregarg" id="jugar" data-nombre=""><i
+                                        class="fas fa-play " ></i> Inciar
                                     juego</button>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                         a
                                         Jugar</button>
                                     <!-- Boton para abandonar partida -->
-                                    <button type="button" class="btn btn-outline-danger" id="btnAbandonar">Abandonar
+                                    <button type="button" class="btn btn-outline-danger abandonar" id="abandonar">Abandonar
                                         Partida</button>
                                 </div>
                             </div>
@@ -89,33 +89,75 @@
                             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Estadisticas</h5>
+                                    <div class="modal-content ">
+                                         
+
+                                        <div class="modal-header mx-5">
+                                            <h5 class="modal-title  my-3" id="exampleModalLabel">Clasificacion</h5>
+                                         
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
+                                             
+                                               
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body mx-5">
                                             <!-- Este es el cuerpo del modal, aqui van a ir las graficas-->
+                                            <div class=" max-w-xl mx-auto table-responsive " id="grillaTabla">
+                                                <table id="grilla"  class="table list" onclick="ver(event);">
+                                                    <thead >
+                                                        <th>Nombre</th>
+                                                        <th>Ganadas</th>
+                                                        <th>Perdidas</th>
+                                                        <th>Terminadas</th>
+                                                        <th>Canceladas</th>
+                                                        
+                                                        
+                                                     
+                                                    </thead>
+                                                    <tbody >
+                                                       
+                                                    </tbody>
+                                    
+                                                </table>            
+                                            </div>
+                                            <script>
+                                                
+                                              
+                                                </script>
+
+                                            <div class="dos-columnas" id="datos">
+                                                <div>
+                                                    <div id="pieChart2"  style="width: 400px; height: 300px;" ></div>
+                                                </div>
+                                                <div>
+                                                    <div id="pieChart"  style="width: 400px; height: 300px;" ></div>
+                                                </div>
+                                               
+                                               
+                                            </div>
+                                            
+                                          
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12 mb-2 text-lg-center text-center">
-                            <!-- ASIGNARLES UN ID A LOS SPAN Y ASI PODER LLEVAR EL CONTROL DE OPORTUNIDADES Y PUNTOS-->
-                            <span class="fw-bold">Usuario: <span class="fw-bold" id="nombreUsuario"></span></span> |
-                            <span class="fw-bold">Oportunidades: <span class="fw-bold" id="intentos"></span></span> |
-                            <span class="fw-bold">Puntos: <span class="fw-bold" id="puntos"></span></span>
-                        </div>
-                        <div class="col-lg-12 mb-2">
+                       
+                        <div class="col-lg-12 ">
                             <div class="row">
-                                <!--<div class="col-lg-5">
-                                    <h3 class="htext">Pistas</h3>
-                                    AQUI SE AGREGARAN LAS PISTAS DE FORMA DINAMICA CON JAVASCRIPT
-                                    <p class="text-break fs-1" id="pista">Aun no hay pistas!</p>
+                                <div class="col-lg-6">
+                                    
+                                    <p class="fw-bold" id="pista"></p>
+                                    
+                                    
                                 </div>
-                                -->
+                                <div class="col-lg-6  text-lg-center text-center">
+                                    <!-- ASIGNARLES UN ID A LOS SPAN Y ASI PODER LLEVAR EL CONTROL DE OPORTUNIDADES Y PUNTOS-->
+                                    <span class="fw-bold">Usuario: <span class="fw-bold" id="nombreUsuario"></span></span> |
+                                    <span class="fw-bold">Oportunidades: <span class="fw-bold" id="intentos"></span></span> |
+                                    <span class="fw-bold">Puntos: <span class="fw-bold" id="puntos"></span></span>
+                                </div>
+                                
                                 <div class="col-lg-12 text-center">
                                     <div class="row">
                                         <div class="col">

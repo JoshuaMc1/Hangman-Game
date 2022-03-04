@@ -62,7 +62,7 @@ h1::after{
     display: flex;
     justify-content: center;
     align-items: center;
-    height:330px;
+    height:370px;
 }
 
 .Panel{
@@ -141,3 +141,25 @@ h1::after{
 .borde-morado {
     border: 1px solid #612daf;
 }
+
+.dos-columnas {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+}
+
+.mostrar{
+    display: inline-block;
+    color: #0C84E8;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#datos {
+    display: none;
+  }

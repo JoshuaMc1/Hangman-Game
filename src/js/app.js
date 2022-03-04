@@ -16,7 +16,7 @@ $("#jugar").click(function () {
     }
 });
 
-$("#btnAbandonar").click(function () { 
+$("#abandonar").click(function () { 
     $("#agregar").removeClass("ocultar");
     $("#parte2").addClass("ocultar");
     $("#opcs").addClass("d-none");
