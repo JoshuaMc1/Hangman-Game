@@ -31,7 +31,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-3 col-form-label fw-bold">Nombre:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="nombre">
+                                    <input type="text" class="form-control " id="nombre"  >
                                 </div>
                             </div>
                         </div>
@@ -39,8 +39,8 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-3 col-form-label fw-bold">Tema:</label>
                                 <div class="col-sm-9">
-                                    <select class="form-select" aria-label="Default select example" id="temas">
-                                        <option value="">Seleccione un tema</option>
+                                    <select class="form-select " aria-label="Default select example" id="temas">
+                                        <option value="">Seleccione tema</option>
                                         <option value="1">Animales</option>
                                         <option value="2">Frutas</option>
                                         <option value="3">Colores</option>
@@ -52,7 +52,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-3 col-form-label fw-bold">Dificultad:</label>
                                 <div class="col-sm-9">
-                                    <select class="form-select" aria-label="Default select example" id="dificultad">
+                                    <select class="form-select  " aria-label="Default select example" id="dificultad">
                                         <option value="">Seleccione la dificultad</option>
                                         <option value="1">Facil</option>
                                         <option value="2">Dificil</option>
@@ -75,14 +75,11 @@
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <!-- Boton para abrir el modal -->
                                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal">Mostrar Graficas</button>
+                                        data-bs-target="#exampleModal">Clasificaciones</button>
                                     <!-- Boton para volver a jugar partida -->
-                                    <button type="button" class="btn btn-outline-success agregar" id="btnVolver">Volver
-                                        a
-                                        Jugar</button>
-                                    <!-- Boton para abandonar partida -->
-                                    <button type="button" class="btn btn-outline-danger abandonar" id="abandonar">Abandonar
+                                   <button type="button" class="btn btn-outline-danger abandonar" id="abandonar">Abandonar
                                         Partida</button>
+                                      
                                 </div>
                             </div>
                             <!-- Este es el modal donde se mostraran las graficas-->
@@ -105,11 +102,11 @@
                                             <div class=" max-w-xl mx-auto table-responsive " id="grillaTabla">
                                                 <table id="grilla"  class="table list" onclick="ver(event);">
                                                     <thead >
-                                                        <th>Nombre</th>
+                                                        <th>Jugadores</th>
                                                         <th>Ganadas</th>
                                                         <th>Perdidas</th>
-                                                        <th>Terminadas</th>
-                                                        <th>Canceladas</th>
+                                                        <th>Culminadas</th>
+                                                        <th>Abandonadas</th>
                                                     </thead>
                                                     <tbody >
                                                        
@@ -118,7 +115,7 @@
                                                 </table>            
                                             </div>
                                             
-                                            <div  id="datos">
+                                            <div class="" id="datos">
                                                 <div class="dos-columnas">
                                                     <div>
                                                         <div id="pieChart2"  class="grafico"></div>
@@ -176,7 +173,7 @@
                                     <div class="container">
                                         <div class="contenedor">
                                             <div class="Panel" id="tecladoD">
-                                                <button data-id="q" class="letras">Q</button>
+                                                <button data-id="q" class="letras teclado">Q</button>
                                                 <button data-id="w" class="letras teclado">W</button>
                                                 <button data-id="e" class="letras teclado">E</button>
                                                 <button data-id="r" class="letras teclado">R</button>

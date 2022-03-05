@@ -40,7 +40,6 @@ let nodoPuntos = document.querySelector("#puntos");
 let nodoHistorial = document.querySelector("#historial");
 let agregar = document.querySelector("#agregar");
 let abandonar = document.querySelector("#abandonar");
-let volverJugar = document.querySelector("#btnVolver");
 let btnAbandonar = document.querySelector("#abandonar");
 let btnJugar = document.querySelector("#jugar");
 var mostrarGra = document.querySelector("#grillaTabla");
@@ -57,31 +56,53 @@ function cargarEventListenrs() {
   agregar.addEventListener("click", agregarGrilla);
   abandonar.addEventListener("click", abandonarParti);
   teclado.addEventListener("click", tecladoDinamico);
-  volverJugar.addEventListener("click", jugarNuevamente);
+  document.addEventListener('DOMContentLoaded', ()=>{
+    arregloTabla= JSON.parse(localStorage.getItem('grillaTabla') ) || [];
+    tablaHTML();
+});
+}
+
+// Funcion JavaScript para la conversion a mayusculas
+function mayusculas(e) {
+  e.value = e.value.toUpperCase();
 }
 
 //funcion para dar clic a la tabla y muestre el grafico
 function ver(e) {
-  document.getElementById("datos").style.display = "block";
-  e = e || window.event;
-  var data = [];
-  var target = e.srcElement || e.target;
-  while (target && target.nodeName !== "TR") {
-    target = target.parentNode;
-  }
-  if (target) {
-    var cells = target.getElementsByTagName("td");
-    for (var i = 0; i < cells.length; i++) {
-      data.push(cells[i].innerHTML);
+  swal({
+    title: "Graficos",
+    text: "Desea ver el grafico?",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+  .then((willDelete) => {
+    if (willDelete) {
+      
+      document.getElementById("datos").style.display = "block";
+      e = e || window.event;
+      var data = [];
+      var target = e.srcElement || e.target;
+      while (target && target.nodeName !== "TR") {
+        target = target.parentNode;
+      }
+      if (target) {
+        var cells = target.getElementsByTagName("td");
+        for (var i = 0; i < cells.length; i++) {
+          data.push(cells[i].innerHTML);
+        }
+      }
+      contaGanador = parseInt(data.slice(1, 2));
+      nombreJugador = data.slice(0, 1);
+      contaPerdedor = parseInt(data.slice(2, 3));
+      contaTerminada = parseInt(data.slice(3, 4));
+      contaCancelada = parseInt(data.slice(4));
+      graficos();
+      graficos1();
+        
+      
     }
-  }
-  contaGanador = parseInt(data.slice(1, 2));
-  nombreJugador = data.slice(0, 1);
-  contaPerdedor = parseInt(data.slice(2, 3));
-  contaTerminada = parseInt(data.slice(1, 2));
-  contaCancelada = parseInt(data.slice(2, 3));
-  graficos();
-  graficos1();
+  });
 }
 
 //grafico de ganador y perdedor
@@ -100,7 +121,7 @@ function graficos() {
     if (contaGanador == 0 && contaPerdedor == 0) {
       mensaje = `No hay registros`;
     } else {
-      mensaje = `Registro de de las partidas de ${nombreJugador}`;
+      mensaje = `Partidas ganadas y perdidas por ${nombreJugador}`;
     }
     var options = {
       title: mensaje,
@@ -130,18 +151,34 @@ function graficos1() {
 
   function grafico() {
     var data = google.visualization.arrayToDataTable([
-      ["Partidas", "Registro de partidas", { role: "style" }],
-      ["Terminada", contaTerminada, "color: #a9bfea"], // RGB value
-      ["Cancelada", contaCancelada, "color: #dc3912"],
+      ["Personas", "Registro de jugador"],
+      ["Terminadas", contaTerminada],
+      ["Canceladas", contaCancelada],
     ]);
 
+    let mensaje;
+    if (contaTerminada == 0 && contaCancelada == 0) {
+      mensaje = `No hay registros`;
+    } else {
+      mensaje = `Partidas terminadas y canceladas por ${nombreJugador}`;
+    }
     var options = {
-      title: "Registro de partidas terminadas o canceladas",
+      title: mensaje,
+      pieHole: 0.4,
+      slices: {
+        0: { color: "green" },
+        1: { color: "yellow" },
+      },
+      backgroundColor: {
+        fill: "none",
+        fillOpacity: 0.1,
+      },
     };
 
-    var chart = new google.visualization.ColumnChart(
+    var chart = new google.visualization.PieChart(
       document.getElementById("pieChart")
     );
+
     chart.draw(data, options);
   }
 }
@@ -165,26 +202,20 @@ function agregarGrilla(e) {
   }
 }
 
-//volver a jugar
-function jugarNuevamente(e) {
-  e.preventDefault();
-  if (e.target.classList.contains("agregar")) {
-    const datosSeleccionado = e.target.parentElement.parentElement;
-    prepararJuego(datosSeleccionado);
-  }
-}
+
 
 function prepararJuego(datos) {
   //// 1 Selecciono una palabra aleatoria de listaPalabra
   //// 1.1 Obtengo la posicion aleatoria
   reiniciar();
-  volverJugar.disabled = true;
-  btnAbandonar.disabled = false;
+  //volverJugar.disabled = true;
+  //btnAbandonar.disabled = false;
   document.getElementById("datos").style.display = "none";
   seguirJugar=true;
 
-
-  nombre = document.getElementById("nombre").value;
+  const conversion = document.getElementById("nombre").value;
+  nombre = conversion.charAt(0).toUpperCase() + conversion.slice(1);
+ 
   var temas = document.getElementById("temas").value;
   var dificultad = document.getElementById("dificultad").value;
 
@@ -212,16 +243,15 @@ function verificarEstadoPartida(estado) {
         }
         if (estado == "ganar") {
           datos.contadorGanador++;
+          datos.terminadas++;
+
         }
         if (estado == "perder") {
           datos.contadorPerdedor++;
-        }
-        if (estado == "ganar") {
           datos.terminadas++;
+
         }
-        if (estado == "perder") {
-          datos.terminadas++;
-        }
+       
         return datos;
       } else {
         return datos;
@@ -255,13 +285,18 @@ function validarCampos(nombre, temas, dificultad) {
     return;
   }
 }
+
+function sincronizarStorage() {
+   localStorage.setItem('grillaTabla', JSON.stringify(arregloTabla));   
+}
+
 function validarEleccion(temas, dificultad) {
   if (temas == "1" && dificultad == "2") {
     listaPalabras = [
-      "caballito de mar",
-      "leon marino",
-      "estrella de mar",
-      "oso panda",
+      "caballitodemar",
+      "leonmarino",
+      "estrellademar",
+      "osopanda",
     ];
     console.log(listaPalabras[0]);
   }
@@ -342,6 +377,7 @@ function abandonarPartida(datos) {
   }
   estado = "abandonar";
   verificarEstadoPartida(estado);
+  location.reload(true);
 }
 
 //mostrar un mensaje si se deja el campo vacio
@@ -477,7 +513,7 @@ function acabarJuego() {
       //crear objeto
       contadorPuntos++;
       nodoPuntos.textContent = contadorPuntos;
-  
+
       reiniciar();
       if (contadorGanador == 0) {
         contadorGanador = 1;
@@ -489,9 +525,13 @@ function acabarJuego() {
       estado = "ganar";
   
       verificarEstadoPartida(estado);
+      seguirJugar=false;
+
+      prepararJuego(datos);
       
+      //location.reload(true);
     }
-    seguirJugar=false;
+    
   
   }
   // Ha perdido: ¿Tiene 0 intentos?
@@ -515,13 +555,15 @@ function acabarJuego() {
       verificarEstadoPartida(estado);
     }
     seguirJugar=false;
+    prepararJuego(datos);
+  //location.reload(true);
     
   }
-  btnAbandonar.disabled = true;
+  btnAbandonar.disabled = false;
 }
 
 function reiniciar() {
-  volverJugar.disabled = false;
+  //volverJugar.disabled = false;
   listaPalabras = [];
   palabraAdivinar = [];
   palabraMostrar = [];
@@ -544,6 +586,7 @@ function vaciarHTML() {
   for (var i = rowCount - 1; i > 0; i--) {
     elmtTable.removeChild(tableRows[i]);
   }
+  sincronizarStorage();
 }
 
 function tablaHTML() {

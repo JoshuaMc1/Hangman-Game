@@ -65,6 +65,7 @@ h1::after{
     height:370px;
 }
 
+
 .Panel{
     display: grid;
     grid-template-columns: repeat(10, 75px);
@@ -143,12 +144,8 @@ h1::after{
 }
 
 .dos-columnas {
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-columns: repeat(2, 50%);
-    grid-template-columns: 1fr 1fr;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 2rem;
+    display: flex;
+    justify-content: space-around;
 }
 
 .mostrar{
@@ -168,3 +165,4 @@ h1::after{
     width: 328px;
     height: 200px;
   }
+  

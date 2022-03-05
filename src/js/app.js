@@ -8,6 +8,7 @@ $("#jugar").click(function () {
         $("#parte2").removeClass("ocultar");
         $("#opcs").removeClass("d-none");
         $("#nombreUsuario").html(usuario);
+        $("#puntos").html(0);
     }
 
     function verificar(objeto){
