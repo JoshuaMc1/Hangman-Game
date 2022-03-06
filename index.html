@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <!-- Soy Daniel Herrera -->
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,7 +14,9 @@
     <link rel="icon" type="image/png" sizes="96x96" href="src/img/favicon-96x96.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Balsamiq+Sans:wght@400;700&family=Coustard:wght@900&family=Lobster&family=Tenor+Sans&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aclonica&family=Balsamiq+Sans:wght@400;700&family=Coustard:wght@900&family=Lobster&family=Tenor+Sans&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="src/style/style.css">
     <title>Hangman Game</title>
 </head>
@@ -31,7 +34,7 @@
                             <div class="mb-3 row">
                                 <label class="col-sm-3 col-form-label fw-bold">Nombre:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control " id="nombre"  >
+                                    <input type="text" class="form-control " id="nombre">
                                 </div>
                             </div>
                         </div>
@@ -62,8 +65,8 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="d-grid">
-                                <button class="btn btn-outline-success rounded agregar agregarg" id="jugar" data-nombre=""><i
-                                        class="fas fa-play " ></i> Inciar
+                                <button class="btn btn-outline-success rounded agregar agregarg" id="jugar"
+                                    data-nombre=""><i class="fas fa-play "></i> Inciar
                                     juego</button>
                             </div>
                         </div>
@@ -77,9 +80,10 @@
                                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal">Clasificaciones</button>
                                     <!-- Boton para volver a jugar partida -->
-                                   <button type="button" class="btn btn-outline-danger abandonar" id="abandonar">Abandonar
+                                    <button type="button" class="btn btn-outline-danger abandonar"
+                                        id="abandonar">Abandonar
                                         Partida</button>
-                                      
+
                                 </div>
                             </div>
                             <!-- Este es el modal donde se mostraran las graficas-->
@@ -87,41 +91,41 @@
                                 aria-hidden="true">
                                 <div class="modal-dialog modal-xl">
                                     <div class="modal-content ">
-                                         
+
 
                                         <div class="modal-header mx-5">
                                             <h5 class="modal-title  my-3" id="exampleModalLabel">Clasificacion</h5>
-                                         
+
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
-                                             
-                                               
+
+
                                         </div>
                                         <div class="modal-body mx-5">
                                             <!-- Este es el cuerpo del modal, aqui van a ir las graficas-->
                                             <div class=" max-w-xl mx-auto table-responsive " id="grillaTabla">
-                                                <table id="grilla"  class="table list" onclick="ver(event);">
-                                                    <thead >
+                                                <table id="grilla" class="table list" onclick="ver(event);">
+                                                    <thead>
                                                         <th>Jugadores</th>
                                                         <th>Ganadas</th>
                                                         <th>Perdidas</th>
                                                         <th>Culminadas</th>
                                                         <th>Abandonadas</th>
                                                     </thead>
-                                                    <tbody >
-                                                       
+                                                    <tbody>
+
                                                     </tbody>
-                                    
-                                                </table>            
+
+                                                </table>
                                             </div>
-                                            
+
                                             <div class="" id="datos">
                                                 <div class="dos-columnas">
                                                     <div>
-                                                        <div id="pieChart2"  class="grafico"></div>
+                                                        <div id="pieChart2" class="grafico"></div>
                                                     </div>
                                                     <div>
-                                                        <div id="pieChart"  class="grafico" ></div>
+                                                        <div id="pieChart" class="grafico"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -130,7 +134,7 @@
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="col-lg-12 ">
                             <div class="row">
                                 <div class="col-lg-6">
@@ -138,11 +142,13 @@
                                 </div>
                                 <div class="col-lg-6  text-lg-center text-center">
                                     <!-- ASIGNARLES UN ID A LOS SPAN Y ASI PODER LLEVAR EL CONTROL DE OPORTUNIDADES Y PUNTOS-->
-                                    <span class="fw-bold">Usuario: <span class="fw-bold" id="nombreUsuario"></span></span> |
-                                    <span class="fw-bold">Oportunidades: <span class="fw-bold" id="intentos"></span></span> |
+                                    <span class="fw-bold">Usuario: <span class="fw-bold"
+                                            id="nombreUsuario"></span></span> |
+                                    <span class="fw-bold">Oportunidades: <span class="fw-bold"
+                                            id="intentos"></span></span> |
                                     <span class="fw-bold">Puntos: <span class="fw-bold" id="puntos"></span></span>
                                 </div>
-                                
+
                                 <div class="col-lg-12 text-center">
                                     <div class="row">
                                         <div class="col">
@@ -160,7 +166,7 @@
                                                 </div>
                                                 <div
                                                     class="row justify-content-center rounded-top mt-3 bg-morado text-white">
-                                                    Letras Fallidas 
+                                                    Letras Fallidas
                                                 </div>
                                                 <div id="historial"
                                                     class="row align-content-center justify-content-center borde-morado rounded-bottom contenedor-letras">
