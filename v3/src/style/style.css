@@ -124,9 +124,9 @@ body{
   display: block;
 }
 #spinner {
-    display: none;
-    justify-content: center;
-    padding: 3rem 0;
+  display: none;
+  justify-content: center;
+  padding: 3rem 0;
 }
 
 

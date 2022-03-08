@@ -14,14 +14,22 @@ var contaPerdedor = 0;
 var contaGanador = 0;
 var contaTerminada = 0;
 var contaCancelada = 0;
+var contaFallida = 0;
+var contaAcertadas=0;
+var contaNoAcertadas=0;
+var conta1=0;
+var conta2=0;
 var terminadas = 0;
 var canceladas = 0;
+var letraAcierto=0;
+var letraFallo=0;
 //intentento que tendra el usaurio
 var numIntentos = 0;
 var seguirJugar = false;
 //estado dependera de donde da clic el usario, si preciona abandonar el estado sera abandonar si gana sera ganar
 var estado = "";
-
+var estado1 ="";
+var estado2 ="";
 //variables
 var nombre = "";
 var letraUsuario = "";
@@ -94,9 +102,12 @@ function ver(e) {
       nombreJugador = data.slice(0, 1);
       contaPerdedor = parseInt(data.slice(2, 3));
       contaTerminada = parseInt(data.slice(3, 4));
-      contaCancelada = parseInt(data.slice(4));
+      contaCancelada = parseInt(data.slice(4,5));
+      letraAcierto = parseInt(data.slice(5,6));
+      letraFallo = parseInt(data.slice(6));
       graficos();
       graficos1();
+      graficos2();
         
       
     }
@@ -181,6 +192,44 @@ function graficos1() {
   }
 }
 
+//grafico de terminadas y canceladas
+function graficos2() {
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(grafico);
+
+  function grafico() {
+    var data = google.visualization.arrayToDataTable([
+      ["Personas", "Registro de jugador"],
+      ["Letras Acertadas", letraAcierto],
+      ["Letras Fallidas", letraFallo],
+    ]);
+
+    let mensaje;
+    if (letraAcierto == 0 && letraFallo == 0) {
+      mensaje = `No hay registros`;
+    } else {
+      mensaje = `Letras acertadas y fallidas ${nombreJugador}`;
+    }
+    var options = {
+      title: mensaje,
+      pieHole: 0.4,
+      slices: {
+        0: { color: "orange" },
+        1: { color: "pink" },
+      },
+      backgroundColor: {
+        fill: "none",
+        fillOpacity: 0.1,
+      },
+    };
+
+    var chart = new google.visualization.PieChart(
+      document.getElementById("pieChart3")
+    );
+
+    chart.draw(data, options);
+  }
+}
 //funcion para saber que se le ha dado clic a un boton o letra, luego se cantura esa letra y compara
 function tecladoDinamico(e) {
   if (e.target.classList.contains("tecladoD")) {
@@ -327,6 +376,8 @@ function verificarEstadoPartida(estado) {
     contadorPerdedor: contadorPerdedor,
     terminadas: terminadas,
     canceladas: canceladas,
+    contaAcertadas: contaAcertadas,
+    contaNoAcertadas: contaNoAcertadas,
   };
 
   if (arregloTabla.some((datos) => datos.nombre === infoDatos.nombre)) {
@@ -344,6 +395,12 @@ function verificarEstadoPartida(estado) {
           datos.contadorPerdedor++;
           datos.terminadas++;
 
+        }
+        if (estado1 == "acierto") {
+          datos.contaAcertadas=conta1;
+        }
+        if (estado2 == "fallo") {
+          datos.contaNoAcertadas=conta2;
         }
        
         return datos;
@@ -378,7 +435,6 @@ function validarEleccion(temas, dificultad) {
       "estrellademar",
       "osopanda",
     ];
-    console.log(listaPalabras[0]);
   }
 
   if (temas == "Frutas" && dificultad == "2") {
@@ -491,31 +547,33 @@ function mostrarError(error) {
 
 
 function seleccionarPista() {
-  if (palabraAleatoria === "caballo")nodoPista.textContent = "Pista: animal que físicamente poseen un gran porte";
-  if (palabraAleatoria === "oveja")nodoPista.textContent = "Pista: produce carne y lana";
-  if (palabraAleatoria === "cerdo")nodoPista.textContent = "Pista: cuadrúpedo con patas cortas y pezuñas";
-  if (palabraAleatoria === "chimpance")nodoPista.textContent = "Pista: pariente mas cercano de los humanos";
-  if (palabraAleatoria === "blanco")nodoPista.textContent = "Pista: color de la nieve";
-  if (palabraAleatoria === "naranja")nodoPista.textContent = "Pista: es color y fruta";
-  if (palabraAleatoria === "azul")nodoPista.textContent = "Pista: color del cielo";
-  if (palabraAleatoria === "negro")nodoPista.textContent = "Pista: es la ausencia de luz";
-  if (palabraAleatoria === "mango")nodoPista.textContent = "Pista: maduro es dulce, y ácido cuando aún está verde";
-  if (palabraAleatoria === "fresa") nodoPista.textContent = "Pista: generalmente a las personas presumidas";
-  if (palabraAleatoria === "cereza")nodoPista.textContent ="Pista: Las palabras y las ------ unas con otras se ";
-  if (palabraAleatoria === "nance")nodoPista.textContent = "Pista: un viejito con tres pelitos en el culito";
-  if (palabraAleatoria === "caballitodemar")nodoPista.textContent = "Pista: posee un cuello como de caballo";
-  if (palabraAleatoria === "leonmarino")nodoPista.textContent = "Pista: comparte muchas caracteristica con a foca";
-  if (palabraAleatoria === "estrellademar")nodoPista.textContent = "Pista: posee cinco brazos";
-  if (palabraAleatoria === "osopanda")nodoPista.textContent = "Pista: animal que practica el kung fu";
-  if (palabraAleatoria === "ciruelapasa")nodoPista.textContent = "Pista: fruta desnutrida";
-  if (palabraAleatoria === "higoseco")nodoPista.textContent = "Pista: resultado de la deshidratacion del higo";
-  if (palabraAleatoria === "orejonesdealbaricoque")nodoPista.textContent = "Pista: son mitades de albaricoques";
-  if (palabraAleatoria === "orejonesdemelocoton")nodoPista.textContent = "Pista: son mitades de melocoton";
-  if (palabraAleatoria === "verdeoliva") nodoPista.textContent = "Pista: color y palmera";
-  if (palabraAleatoria === "amarillolima")nodoPista.textContent = "Pista: color y fruta";
-  if (palabraAleatoria === "lavandafloral")nodoPista.textContent = "Pista: color y flor";
-  if (palabraAleatoria === "azulmarino")nodoPista.textContent = "Pista: color y referente al mar";
+  if (palabraAleatoria === "caballo" && contaFallida>=3)nodoPista.textContent = "Pista: animal que físicamente poseen un gran porte";
+  if (palabraAleatoria === "oveja" && contaFallida>=3)nodoPista.textContent = "Pista: produce carne y lana";
+  if (palabraAleatoria === "cerdo" && contaFallida>=3)nodoPista.textContent = "Pista: cuadrúpedo con patas cortas y pezuñas";
+  if (palabraAleatoria === "chimpance" && contaFallida>=3)nodoPista.textContent = "Pista: pariente mas cercano de los humanos";
+  if (palabraAleatoria === "blanco" && contaFallida>=3)nodoPista.textContent = "Pista: color de la nieve";
+  if (palabraAleatoria === "naranja" && contaFallida>=3)nodoPista.textContent = "Pista: es color y fruta";
+  if (palabraAleatoria === "azul" && contaFallida>=3)nodoPista.textContent = "Pista: color del cielo";
+  if (palabraAleatoria === "negro" && contaFallida>=3)nodoPista.textContent = "Pista: es la ausencia de luz";
+  if (palabraAleatoria === "mango" && contaFallida>=3)nodoPista.textContent = "Pista: maduro es dulce, y ácido cuando aún está verde";
+  if (palabraAleatoria === "fresa" && contaFallida>=3) nodoPista.textContent = "Pista: generalmente a las personas presumidas";
+  if (palabraAleatoria === "cereza" && contaFallida>=3)nodoPista.textContent ="Pista: Las palabras y las ------ unas con otras se ";
+  if (palabraAleatoria === "nance" && contaFallida>=3)nodoPista.textContent = "Pista: un viejito con tres pelitos en el culito";
+  if (palabraAleatoria === "caballitodemar" && contaFallida>=3)nodoPista.textContent = "Pista: posee un cuello como de caballo";
+  if (palabraAleatoria === "leonmarino"  && contaFallida>=3)nodoPista.textContent = "Pista: comparte muchas caracteristica con a foca";
+  if (palabraAleatoria === "estrellademar" && contaFallida>=3)nodoPista.textContent = "Pista: posee cinco brazos";
+  if (palabraAleatoria === "osopanda" && contaFallida>=3)nodoPista.textContent = "Pista: animal que practica el kung fu";
+  if (palabraAleatoria === "ciruelapasa" && contaFallida>=3)nodoPista.textContent = "Pista: fruta desnutrida";
+  if (palabraAleatoria === "higoseco" && contaFallida>=3)nodoPista.textContent = "Pista: resultado de la deshidratacion del higo";
+  if (palabraAleatoria === "orejonesdealbaricoque" && contaFallida>=3)nodoPista.textContent = "Pista: son mitades de albaricoques";
+  if (palabraAleatoria === "orejonesdemelocoton" && contaFallida>=3)nodoPista.textContent = "Pista: son mitades de melocoton";
+  if (palabraAleatoria === "verdeoliva" && contaFallida>=3) nodoPista.textContent = "Pista: color y palmera";
+  if (palabraAleatoria === "amarillolima" && contaFallida>=3)nodoPista.textContent = "Pista: color y fruta";
+  if (palabraAleatoria === "lavandafloral" && contaFallida>=3)nodoPista.textContent = "Pista: color y flor";
+  if (palabraAleatoria === "azulmarino" && contaFallida>=3)nodoPista.textContent = "Pista: color y referente al mar";
+  
 }
+
 
 /**
  * Método que comprueba la letra que ha introducido el usuario
@@ -523,6 +581,7 @@ function seleccionarPista() {
 function comprobarLetraUsuario() {
   //// 1 Sustituye los guiones por la letra acertada
   // Guardo la letra del input que ha escrito el usuario en una variable
+  
  
   // Recorremos todas las letras para saber si alguna esta bien
   for (const [posicion, letraAdivinar] of palabraAdivinar.entries()) {
@@ -531,7 +590,16 @@ function comprobarLetraUsuario() {
     if (letraUsuario == letraAdivinar) {
       // Sustituimos el guion por la letra acertada
       palabraMostrar[posicion] = letraAdivinar;
+      conta1++;
+
+      if (contaAcertadas == 0) {
+        contaAcertadas = conta1;
+      }
+      estado1="acierto";
+
+      
     }
+  
   }
   //// 2 Comprobamos si se ha equivocado
   // ¿No esta la letra?
@@ -539,8 +607,16 @@ function comprobarLetraUsuario() {
     // Restamos un intento
     numIntentos -= 1;
     // Guardamos en el historial la letra pulsada por el usuario
+    contaFallida++;
+    conta2++;
+
+    if (contaNoAcertadas == 0) {
+      contaNoAcertadas = conta2;
+    }
+    estado2="fallo"
 
     historialLetrasUsuario.push(letraUsuario);
+    console.log();
 
     //cambiar la imagen segun los intentos
     if (numIntentos == 4) {
@@ -555,7 +631,7 @@ function comprobarLetraUsuario() {
     if (numIntentos == 1) {
       document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado4.png";
     }
-    if (numIntentos === 0) {
+    if (numIntentos == 0) {
       document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado5.png";
     }
   }
@@ -589,7 +665,8 @@ function adivinoPalabra() {
 
   verificarEstadoPartida(estado);
   seguirJugar=true;
-
+  contaFallida=0;
+  nodoPista.textContent='Aun no hay pistas disponibles...';
   prepararJuego(datos);
 }
 function noAdivino(){
@@ -609,6 +686,7 @@ function noAdivino(){
 
   estado = "perder";
   verificarEstadoPartida(estado);
+
 }
 /**
  * Método que verifica si se ha acabado el juego
@@ -621,17 +699,32 @@ function acabarJuego() {
       adivinoPalabra();
       
       //location.reload(true);
+      seguirJugar=true;
+      setTimeout(() => {
+      prepararJuego(datos);
+        
+        document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+  
+      }, 1000);
     }
-    
+  
   
   }
   // Ha perdido: ¿Tiene 0 intentos?
   if (numIntentos == 0) {
     if(seguirJugar==true) {
       noAdivino();
+      seguirJugar=true;
+      setTimeout(() => {
+        contaFallida=0;
+        nodoPista.textContent='Aun no hay pistas disponibles...';
+    
+        prepararJuego(datos);
+        document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+  
+      }, 3000);
     }
-    seguirJugar=true;
-    prepararJuego(datos);
+   
   //location.reload(true);
     
   }
@@ -648,7 +741,6 @@ function reiniciar() {
   palabraMostrar = [];
   historialLetrasUsuario = [];
   canceladas = 0;
-  document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
 }
 
 
@@ -678,6 +770,8 @@ function tablaHTML() {
       contadorPerdedor,
       terminadas,
       canceladas,
+      contaAcertadas,
+      contaNoAcertadas
     } = dato;
     const row = document.createElement("tr");
     row.innerHTML = `
@@ -686,6 +780,8 @@ function tablaHTML() {
       <td>${contadorPerdedor} </td>
       <td>${terminadas} </td>
       <td>${canceladas} </td>
+      <td>${contaAcertadas} </td>
+      <td>${contaNoAcertadas} </td>
       
     `;
     grilla.appendChild(row);

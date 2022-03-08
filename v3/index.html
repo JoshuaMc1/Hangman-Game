@@ -106,32 +106,6 @@
             </div>
        
             <div class="row animate__animated animate__backInLeft animate__delay-2s">
-                <div class="col-lg-3 gap-2 mb-3">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h3
-                                class="fs-bold text-warning animate__animated animate__pulse animate__slow animate__infinite">
-                                Pistas <i class="fas fa-lightbulb"></i></h3>
-                            <p class="fs-bold" id="pista">Aun no hay pistas disponibles...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7 gap-2 mb-3 text-center">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12 mb-4">
-                                    <img id="imagen_ahorcado"  src="src/img/ahorcado0.png" class="img-fluid">
-                                </div>
-                                <div class="col-lg-12 mb-2">
-                                    <div id="resultado"
-                                    class="fs-bold  contenedor-letras-secreto">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-2 gap-2 mb-3">
                     <div class="row-col-4">
                         <div class="col mb-2">
@@ -180,6 +154,33 @@
                                         Ninguna</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 gap-2 mb-3 text-center">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-4">
+                                    <img id="imagen_ahorcado"  src="src/img/ahorcado0.png" class="img-fluid">
+                                </div>
+                                <div class="col-lg-12 mb-2">
+                                    <div id="resultado"
+                                    class="fs-bold  contenedor-letras-secreto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-lg-3 gap-2 mb-3">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h3
+                                class="fs-bold text-warning animate__animated animate__pulse animate__slow animate__infinite">
+                                Pistas <i class="fas fa-lightbulb"></i></h3>
+                            <p class="fs-bold" id="pista">Aun no hay pistas disponibles...</p>
                         </div>
                     </div>
                 </div>
@@ -253,7 +254,8 @@
                                         <th>Perdidas</th>
                                         <th>Culminadas</th>
                                         <th>Abandonadas</th>
-                                   
+                                        <th>Acertadas</th>
+                                        <th>No Acertadas</th>
                                 </thead>
                                 <tbody>
                                     
@@ -267,6 +269,9 @@
                                 </div>
                                 <div>
                                     <div id="pieChart" class="grafico"></div>
+                                </div>
+                                <div>
+                                    <div id="pieChart3" class="grafico"></div>
                                 </div>
                             </div>
                         </div>
