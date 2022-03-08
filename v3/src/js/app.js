@@ -34,10 +34,9 @@ const abandonar = document.querySelector("#abandonar");
 const mostrarGra = document.querySelector("#grillaTabla");
 const fila = document.querySelector("#grilla tbody");
 let tecladito = document.getElementById("SelecTeclado");
-var table = document.getElementsByTagName("table")[0];
-var tbody = table.getElementsByTagName("tbody")[0];
-var table = document.getElementsByTagName("table")[0];
-var tbody = table.getElementsByTagName("tbody")[0];
+let table = document.getElementsByTagName("table")[0];
+let tbody = table.getElementsByTagName("tbody")[0];
+
 
 //evento escucha clic
 cargarEventListenrs();
