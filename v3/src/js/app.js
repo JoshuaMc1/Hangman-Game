@@ -1,52 +1,39 @@
 
 //arreglos
-var listaPalabras = [];
-var palabraAdivinar = [];
-var palabraMostrar = [];
-var historialLetrasUsuario = [];
-var arregloTabla = [];
-
+let listaPalabras = [];
+let palabraAdivinar = [];
+let palabraMostrar = [];
+let historialLetrasUsuario = [];
+let arregloTabla = [];
 //contadores
-var contadorGanador = 0;
-var contadorPerdedor = 0;
-var contadorPuntos = 0;
-var contaPerdedor = 0;
-var contaGanador = 0;
-var contaTerminada = 0;
-var contaCancelada = 0;
-var contaFallida = 0;
-var contaAcertadas=0;
-var contaNoAcertadas=0;
-var conta1=0;
-var conta2=0;
-var terminadas = 0;
-var canceladas = 0;
-var letraAcierto=0;
-var letraFallo=0;
+let contadorPuntos = 0;
+let contaFallida = 0;
+let contaAcierto=0;
+let contaFallo=0;
 //intentento que tendra el usaurio
-var numIntentos = 0;
-var seguirJugar = false;
+let numIntentos = 0;
+let seguirJugar = false;
 //estado dependera de donde da clic el usario, si preciona abandonar el estado sera abandonar si gana sera ganar
-var estado = "";
-var estado1 ="";
-var estado2 ="";
+let estado = "";
+let estadoAcierto ="";
+let estadoFallo ="";
 //variables
-var nombre = "";
-var letraUsuario = "";
-var palabraAleatoria = "";
-let teclado = document.querySelector("#teclado");
-var nodoLetra = document.querySelector("#letra");
-var nodoBoton = document.querySelector("#boton");
-var nodoResultado = document.querySelector("#resultado");
-var nodoIntentos = document.querySelector("#intentos");
-var usuario = document.querySelector("#nombreUsuario");
-var nodoPista = document.querySelector("#pista");
-var nodoPuntos = document.querySelector("#puntos");
-var nodoHistorial = document.querySelector("#historial");
-var agregar = document.querySelector("#agregar");
-var abandonar = document.querySelector("#abandonar");
-var mostrarGra = document.querySelector("#grillaTabla");
-var fila = document.querySelector("#grilla tbody");
+let nombre = "";
+let letraUsuario = "";
+let palabraAleatoria = "";
+const nodoLetra = document.querySelector("#letra");
+const nodoBoton = document.querySelector("#boton");
+const nodoResultado = document.querySelector("#resultado");
+const nodoIntentos = document.querySelector("#intentos");
+const usuario = document.querySelector("#nombreUsuario");
+const nodoPista = document.querySelector("#pista");
+const nodoPuntos = document.querySelector("#puntos");
+const nodoHistorial = document.querySelector("#historial");
+const agregar = document.querySelector("#agregar");
+const abandonar = document.querySelector("#abandonar");
+const mostrarGra = document.querySelector("#grillaTabla");
+const fila = document.querySelector("#grilla tbody");
+let tecladito = document.getElementById("SelecTeclado");
 var table = document.getElementsByTagName("table")[0];
 var tbody = table.getElementsByTagName("tbody")[0];
 var table = document.getElementsByTagName("table")[0];
@@ -58,7 +45,7 @@ function cargarEventListenrs() {
   document.addEventListener('DOMContentLoaded', cargar);
   agregar.addEventListener("click", agregarGrilla);
   abandonar.addEventListener("click", abandonarParti);
-  teclado.addEventListener("click", tecladoDinamico);
+  tecladito.addEventListener("click", tecladoDinamico);
   document.addEventListener('DOMContentLoaded', ()=>{
     arregloTabla= JSON.parse(localStorage.getItem('grillaTabla') ) || [];
     tablaHTML();
@@ -72,9 +59,17 @@ function cargar() {
   seguirJugar=false;
 }
 
-
 //funcion para dar clic a la tabla y muestre el grafico
 function ver(e) {
+  e.preventDefault();
+  var contaGanador = 0;
+  var contaPerdedor = 0;
+  var contaTerminada = 0;
+  var contaCancelada = 0;
+  var letraAcierto=0;
+  var letraFallo=0;
+  var nombreJugador="";
+
   swal({
     title: "Graficos",
     text: "Desea ver el grafico?",
@@ -98,6 +93,7 @@ function ver(e) {
           data.push(cells[i].innerHTML);
         }
       }
+     
       contaGanador = parseInt(data.slice(1, 2));
       nombreJugador = data.slice(0, 1);
       contaPerdedor = parseInt(data.slice(2, 3));
@@ -105,9 +101,9 @@ function ver(e) {
       contaCancelada = parseInt(data.slice(4,5));
       letraAcierto = parseInt(data.slice(5,6));
       letraFallo = parseInt(data.slice(6));
-      graficos();
-      graficos1();
-      graficos2();
+      graficos(contaGanador, contaPerdedor, nombreJugador);
+      graficos1(contaTerminada, contaCancelada, nombreJugador);
+      graficos2(letraAcierto, letraFallo, nombreJugador);
         
       
     }
@@ -115,7 +111,7 @@ function ver(e) {
 }
 
 //grafico de ganador y perdedor
-function graficos() {
+function graficos(contaGanador, contaPerdedor, nombreJugador) {
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(grafico);
 
@@ -154,7 +150,7 @@ function graficos() {
 }
 
 //grafico de terminadas y canceladas
-function graficos1() {
+function graficos1(contaTerminada, contaCancelada, nombreJugador) {
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(grafico);
 
@@ -193,7 +189,7 @@ function graficos1() {
 }
 
 //grafico de terminadas y canceladas
-function graficos2() {
+function graficos2(letraAcierto, letraFallo, nombreJugador) {
   google.charts.load("current", { packages: ["corechart"] });
   google.charts.setOnLoadCallback(grafico);
 
@@ -232,6 +228,7 @@ function graficos2() {
 }
 //funcion para saber que se le ha dado clic a un boton o letra, luego se cantura esa letra y compara
 function tecladoDinamico(e) {
+  e.preventDefault();
   if (e.target.classList.contains("tecladoD")) {
     let filaId = e.target.getAttribute("data-id");
 
@@ -251,12 +248,7 @@ function agregarGrilla(e) {
     const datosSeleccionado = e.target.parentElement.parentElement;
     seguirJugar=true;
     desactivarInput();
-
-    prepararJuego(datosSeleccionado);
-
-   
-    
-    
+    prepararJuego(datosSeleccionado); 
   }
 }
 
@@ -264,10 +256,7 @@ function activar() {
   document.getElementById('nombre').disabled=false;
   document.getElementById('temas').disabled=false;
   document.getElementById('dificultad').disabled=false;
-  // Ocultar Spinner y mostrar gif de enviado
-
 }
-
 
 function desactivarInput() {
   document.getElementById('nombre').disabled=true;
@@ -275,27 +264,32 @@ function desactivarInput() {
     document.getElementById('dificultad').disabled=true;
 }
 
-
-
 function activarBotones(){
   document.getElementById('jugar').disabled=true;
   document.getElementById('abandonar').disabled=false;
   document.getElementById('clasificacion').disabled=false;
 }
 
+function spinners(spinner){
+    
+    setTimeout( () => {
+      spinner.style.display = 'none';
+    setTimeout(() =>  {
+      //document.getElementById("mostrar").style.display = "none";      
+    }, 300);
+    }, 3000);
+}
+
 function prepararJuego(datos) {
   //// 1 Selecciono una palabra aleatoria de listaPalabra
   //// 1.1 Obtengo la posicion aleatoria
   reiniciar();
-  
   document.getElementById("datos").style.display = "none";
-  
   // Spinner al presionar Enviar
   const spinner = document.querySelector('#spinner');
   spinner.style.display = 'flex';
   const conversion = document.getElementById("nombre").value;
   nombre = conversion.charAt(0).toUpperCase() + conversion.slice(1);
- 
   var temas = document.getElementById("temas").value;
   var dificultad = document.getElementById("dificultad").value;
 
@@ -305,71 +299,63 @@ function prepararJuego(datos) {
     mostrarError("Falta llenar el campo de nombre");
     document.querySelector("#nombre").focus();
     activar();
-    setTimeout( () => {
-      spinner.style.display = 'none';
-      setTimeout(() =>  {
-           
-      }, 100);
-      }, 3000);
-
+    spinners(spinner);
     return;
   }
   if (temas === "") {
     mostrarError("Falta seleccionar un tema");
     document.querySelector("#temas").focus();
     activar();
-    setTimeout( () => {
-      spinner.style.display = 'none';
-      setTimeout(() =>  {
-           
-      }, 100);
-  }, 3000);
-  
-
+    spinners(spinner);
     return;
   }
   if (dificultad === "") {
     mostrarError("Falta seleccionar la dificultad");
     document.querySelector("#dificultad").focus();
     activar();
-    setTimeout( () => {
-      spinner.style.display = 'none';
-      setTimeout(() =>  {
-           
-      }, 100);
-  }, 3000);
-  
+    spinners(spinner);
     return;
   }
  
-  
   setTimeout( () => {
     spinner.style.display = 'none';
-    setTimeout(() =>  {
-document.getElementById("mostrar").style.display = "none";
+  setTimeout(() =>  {
+    document.getElementById("mostrar").style.display = "none";      
+  }, 400);
+  }, 3000);
 
-         
-    }, 400);
-}, 3000);
-
-document.getElementById("ocultar").style.display = "block";
+  document.getElementById("ocultar").style.display = "block";
   activarBotones();
   validarEleccion(temas, dificultad);
 }
 
-function comenzarPartida(envio) {
-  
-  const comenzar = document.createElement("p");
-  comenzar.textContent = envio;
-  comenzar.classList.add("comenzar");
-
-  const contenido = document.querySelector("#loaders");
-  contenido.appendChild(comenzar);
-
-}
-
 //validaciones y contadores
 function verificarEstadoPartida(estado) {
+  var contadorGanador = 0;
+  var contadorPerdedor = 0;
+  var terminadas = 0;
+  var canceladas = 0;
+  var contaAcertadas=0;
+  var contaNoAcertadas=0;
+  if (contadorGanador == 0) {
+    contadorGanador = 1;
+  }
+  if (terminadas == 0) {
+    terminadas = 1;
+  }
+  if (contadorPerdedor == 0) {
+    contadorPerdedor = 1;
+  }
+  if (terminadas == 0) {
+    terminadas = 1;
+  }
+  if (contaAcertadas == 0) {
+    contaAcertadas = contaAcierto;
+  }
+  if (contaNoAcertadas == 0) {
+    contaNoAcertadas = contaFallo;
+  }
+  
   const infoDatos = {
     nombre: nombre,
     contadorGanador: contadorGanador,
@@ -396,11 +382,11 @@ function verificarEstadoPartida(estado) {
           datos.terminadas++;
 
         }
-        if (estado1 == "acierto") {
-          datos.contaAcertadas=conta1;
+        if (estadoAcierto == "acierto") {
+          datos.contaAcertadas=contaAcierto;
         }
-        if (estado2 == "fallo") {
-          datos.contaNoAcertadas=conta2;
+        if (estadoFallo == "fallo") {
+          datos.contaNoAcertadas=contaFallo;
         }
        
         return datos;
@@ -418,10 +404,6 @@ function verificarEstadoPartida(estado) {
 }
 
 //preparar el juego
-
-function validarCampos(nombre, temas, dificultad) {
-  
-}
 
 function sincronizarStorage() {
    localStorage.setItem('grillaTabla', JSON.stringify(arregloTabla));   
@@ -483,8 +465,6 @@ function validarEleccion(temas, dificultad) {
     listaPalabras = ["openresty", "aspnet", "opengse","nodejs"];
   }
   
-  
-
   var i,posAleatoriaListaPalabras;
 
   for (i = listaPalabras.length; i; i--) {
@@ -508,23 +488,16 @@ function validarEleccion(temas, dificultad) {
   //// 3 Dibuja todo lo necesario
   
     dibujarJuego();
-
-  
 }
 
-/**
- * Método que redibuja lo que ve el usuario con los cambios
- */
+ //Método que redibuja lo que ve el usuario con los cambios
 function dibujarJuego() {
   // Convertimos un array en un texto, separado por espacios, y lo mostramos en el div resultado
   nodoResultado.textContent = palabraMostrar.join(" ");
   // Mostramos los intentos
   nodoIntentos.textContent = numIntentos;
   usuario.textContent = nombre;
-
-
   seleccionarPista();
-
   // Mostramos el historial de letras
   nodoHistorial.textContent = historialLetrasUsuario.join(" ");
 }
@@ -539,8 +512,6 @@ function abandonarParti(e) {
   }
 }
 
-
-
 //abandonar partida y aumentar contador
 function abandonarPartida(datos) {
   if (canceladas == 0) {
@@ -550,13 +521,11 @@ function abandonarPartida(datos) {
   verificarEstadoPartida(estado);
   location.reload(true);
 }
-
 //mostrar un mensaje si se deja el campo vacio
 function mostrarError(error) {
   const mensajeError = document.createElement("p");
   mensajeError.textContent = error;
   mensajeError.classList.add("error");
-
   const contenido = document.querySelector("#mensaje");
   contenido.appendChild(mensajeError);
 
@@ -564,8 +533,6 @@ function mostrarError(error) {
     mensajeError.remove();
   }, 3000);
 }
-
-
 
 function seleccionarPista() {
   if (palabraAleatoria === "caballo" && contaFallida>=3)nodoPista.textContent = "Pista: animal que físicamente poseen un gran porte";
@@ -597,6 +564,7 @@ function seleccionarPista() {
   if (palabraAleatoria === "elefante" && contaFallida>=3)nodoPista.textContent = "Pista:  posee una larga trompa";
   if (palabraAleatoria === "ardilla" && contaFallida>=3)nodoPista.textContent = "Pista:  son auténticas acróbatas, saltan de un arbol a otro";
   if (palabraAleatoria === "cocodrilo" && contaFallida>=3)nodoPista.textContent = "Pista:  su alimentación es carnívora, reptil";
+  if (palabraAleatoria === "zorro" && contaFallida>=3)nodoPista.textContent = "Pista:  astuto";
   if (palabraAleatoria === "papaya" && contaFallida>=3)nodoPista.textContent = "Pista:  la pulpa es roja anaranjada o amarilla, dulce y muy jugosa";
   if (palabraAleatoria === "kiwi" && contaFallida>=3)nodoPista.textContent = "Pista:  contribuye a la salud digestiva";
   if (palabraAleatoria === "banano" && contaFallida>=3)nodoPista.textContent = "Pista:  es considera una planta, pero en realidad es una hierba";
@@ -643,20 +611,12 @@ function seleccionarPista() {
   if (palabraAleatoria === "opengse" && contaFallida>=3)nodoPista.textContent = "Pista:  es una plataforma completa de aplicaciones geoespaciales";
   if (palabraAleatoria === "nodejs" && contaFallida>=3)nodoPista.textContent = "Pista:  es un entorno de tiempo de ejecución de JavaScript ";
   if (palabraAleatoria === "java" && contaFallida>=3)nodoPista.textContent = "Pista:  comercializada por primera vez en 1995 por Sun Microsystems";
- 
- 
-  
 }
-
-
-/**
- * Método que comprueba la letra que ha introducido el usuario
- */
+ //Método que comprueba la letra que ha introducido el usuario
+ 
 function comprobarLetraUsuario() {
   //// 1 Sustituye los guiones por la letra acertada
   // Guardo la letra del input que ha escrito el usuario en una variable
-  
- 
   // Recorremos todas las letras para saber si alguna esta bien
   for (const [posicion, letraAdivinar] of palabraAdivinar.entries()) {
     // Comprobamos si la letra del usuario es igual a la letra a adivinar
@@ -664,14 +624,8 @@ function comprobarLetraUsuario() {
     if (letraUsuario == letraAdivinar) {
       // Sustituimos el guion por la letra acertada
       palabraMostrar[posicion] = letraAdivinar;
-      conta1++;
-
-      if (contaAcertadas == 0) {
-        contaAcertadas = conta1;
-      }
-      estado1="acierto";
-
-      
+      contaAcierto++;
+      estadoAcierto="acierto"; 
     }
   
   }
@@ -682,16 +636,10 @@ function comprobarLetraUsuario() {
     numIntentos -= 1;
     // Guardamos en el historial la letra pulsada por el usuario
     contaFallida++;
-    conta2++;
-
-    if (contaNoAcertadas == 0) {
-      contaNoAcertadas = conta2;
-    }
-    estado2="fallo"
-
+    contaFallo++;
+    estadoFallo="fallo"
     historialLetrasUsuario.push(letraUsuario);
-    console.log();
-
+  
     //cambiar la imagen segun los intentos
     if (numIntentos == 4) {
       document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado1.png";
@@ -726,17 +674,8 @@ function adivinoPalabra() {
   //crear objeto
   contadorPuntos++;
   nodoPuntos.textContent = contadorPuntos;
-
   reiniciar();
-  if (contadorGanador == 0) {
-    contadorGanador = 1;
-  }
-  if (terminadas == 0) {
-    terminadas = 1;
-  }
-
   estado = "ganar";
-
   verificarEstadoPartida(estado);
   seguirJugar=true;
   contaFallida=0;
@@ -750,21 +689,11 @@ function noAdivino(){
                   `,
     icon: "error",
   });
- 
-  if (contadorPerdedor == 0) {
-    contadorPerdedor = 1;
-  }
-  if (terminadas == 0) {
-    terminadas = 1;
-  }
-
   estado = "perder";
   verificarEstadoPartida(estado);
 
 }
-/**
- * Método que verifica si se ha acabado el juego
- */
+//Método que verifica si se ha acabado el juego
 function acabarJuego() {
   // Ha ganado: ¿Le queda guiones al jugador?
 
@@ -816,9 +745,6 @@ function reiniciar() {
   historialLetrasUsuario = [];
   canceladas = 0;
 }
-
-
-
 
 // limpiar las filas de la tabla
 
