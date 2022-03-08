@@ -451,18 +451,39 @@ function validarEleccion(temas, dificultad) {
       "verdeoliva",
       "amarillolima",
       "lavandafloral",
+      
     ];
   }
 
   if (temas == "Animales" && dificultad == "1") {
-    listaPalabras = ["caballo", "oveja", "cerdo", "chimpance"];
+    listaPalabras = ["caballo", "oveja", "cerdo", "chimpance", "leon", "iguana", "elefante", "ardilla", "zorro", "cocodrilo"];
   }
   if (temas == "Frutas" && dificultad == "1") {
-    listaPalabras = ["mango", "fresa", "cereza", "nance"];
+    listaPalabras = ["mango", "fresa", "cereza", "nance", "papaya", "kiwi", "banano", "manzana", "caqui", "uva", "coco", "maracuya"];
   }
   if (temas == "Colores" && dificultad == "1") {
-    listaPalabras = ["blanco", "negro", "azul", "naranja"];
+    listaPalabras = ["blanco", "negro", "azul", "naranja", "marron", "rosa", "turqueza", "cian", "rojo", "zafiro"];
   }
+  if (temas == "Base de datos" && dificultad == "1") {
+    listaPalabras = ["mysql", "orientdb", "couchdb", "mariadb","mongodb","postgresql", "firebird"];
+  }
+  if (temas == "Base de datos" && dificultad == "2") {
+    listaPalabras = ["oracledatabase", "intersystemscache", "microsoftaccess", "microsoftsqlserver"];
+  }
+  if (temas == "Frontend" && dificultad == "1") {
+    listaPalabras = ["html", "css", "react", "vue","elm"];
+  }
+  if (temas == "Frontend" && dificultad == "2") {
+    listaPalabras = ["javascript", "typescript", "jquery", "angular","sass"];
+  }
+  if (temas == "Backend" && dificultad == "1") {
+    listaPalabras = ["python", "ruby", "php", "java","perl","kotlin","scala"];
+  }
+  if (temas == "Backend" && dificultad == "2") {
+    listaPalabras = ["openresty", "aspnet", "opengse","nodejs"];
+  }
+  
+  
 
   var i,posAleatoriaListaPalabras;
 
@@ -571,6 +592,58 @@ function seleccionarPista() {
   if (palabraAleatoria === "amarillolima" && contaFallida>=3)nodoPista.textContent = "Pista: color y fruta";
   if (palabraAleatoria === "lavandafloral" && contaFallida>=3)nodoPista.textContent = "Pista: color y flor";
   if (palabraAleatoria === "azulmarino" && contaFallida>=3)nodoPista.textContent = "Pista: color y referente al mar";
+  if (palabraAleatoria === "leon" && contaFallida>=3)nodoPista.textContent = "Pista: Rey de la Selva";
+  if (palabraAleatoria === "iguana" && contaFallida>=3)nodoPista.textContent = "Pista:  animal ovíparo, reptil";
+  if (palabraAleatoria === "elefante" && contaFallida>=3)nodoPista.textContent = "Pista:  posee una larga trompa";
+  if (palabraAleatoria === "ardilla" && contaFallida>=3)nodoPista.textContent = "Pista:  son auténticas acróbatas, saltan de un arbol a otro";
+  if (palabraAleatoria === "cocodrilo" && contaFallida>=3)nodoPista.textContent = "Pista:  su alimentación es carnívora, reptil";
+  if (palabraAleatoria === "papaya" && contaFallida>=3)nodoPista.textContent = "Pista:  la pulpa es roja anaranjada o amarilla, dulce y muy jugosa";
+  if (palabraAleatoria === "kiwi" && contaFallida>=3)nodoPista.textContent = "Pista:  contribuye a la salud digestiva";
+  if (palabraAleatoria === "banano" && contaFallida>=3)nodoPista.textContent = "Pista:  es considera una planta, pero en realidad es una hierba";
+  if (palabraAleatoria === "manzana" && contaFallida>=3)nodoPista.textContent = "Pista: su es forma redonda y sabor muy dulce";
+  if (palabraAleatoria === "caqui" && contaFallida>=3)nodoPista.textContent = "Pista: son ideal para desintoxicar el organismo";
+  if (palabraAleatoria === "uva" && contaFallida>=3)nodoPista.textContent = "Pista: ayuda para mantener una presión arterial saludable";
+  if (palabraAleatoria === "coco" && contaFallida>=3)nodoPista.textContent = "Pista: se puede beber su agua sin romper la cáscara";
+  if (palabraAleatoria === "maracuya" && contaFallida>=3)nodoPista.textContent = "Pista: su fruto es una baya";
+  if (palabraAleatoria === "marron" && contaFallida>=3)nodoPista.textContent = "Pista: se asocia frecuentemente con emociones desagradables";
+  if (palabraAleatoria === "rosa" && contaFallida>=3)nodoPista.textContent = "Pista: se asocia a la pantera";
+  if (palabraAleatoria === "turqueza" && contaFallida>=3)nodoPista.textContent = "Pista: se le conoce como verde azulado";
+  if (palabraAleatoria === "cian" && contaFallida>=3)nodoPista.textContent = "Pista: se deriva de un celeste saturado";
+  if (palabraAleatoria === "rojo" && contaFallida>=3)nodoPista.textContent = "Pista: color primario";
+  if (palabraAleatoria === "zafiro" && contaFallida>=3)nodoPista.textContent = "Pista: mineral";
+  if (palabraAleatoria === "mysql" && contaFallida>=3)nodoPista.textContent = "Pista: My Structured Query Language";
+  if (palabraAleatoria === "orientdb" && contaFallida>=3)nodoPista.textContent = "Pista: base de datos orientado a documentos";
+  if (palabraAleatoria === "couchdb" && contaFallida>=3)nodoPista.textContent = "Pista: se utiliza para facilitar la accesibilidad y compatibilidad web con una diversidad de dispositivos.";
+  if (palabraAleatoria === "mariadb" && contaFallida>=3)nodoPista.textContent = "Pista: se deriva de MySQL";
+  if (palabraAleatoria === "mongodb" && contaFallida>=3)nodoPista.textContent = "Pista: del inglés humongous, 'enorme'";
+  if (palabraAleatoria === "postgresql" && contaFallida>=3)nodoPista.textContent = "Pista:  también llamado Postgres";
+  if (palabraAleatoria === "firebird" && contaFallida>=3)nodoPista.textContent = "Pista:  pájaro de fuego";
+  if (palabraAleatoria === "oracledatabase" && contaFallida>=3)nodoPista.textContent = "Pista:  fundada por la empresa de consultoría Software Development Laboratories ";
+  if (palabraAleatoria === "intersystemscache" && contaFallida>=3)nodoPista.textContent = "Pista:  se utuliza para la gestión de grandes volúmenes de datos";
+  if (palabraAleatoria === "microsoftaccess" && contaFallida>=3)nodoPista.textContent = "Pista:  sucesor de Embedded Basic";
+  if (palabraAleatoria === "microsoftsqlserver" && contaFallida>=3)nodoPista.textContent = "Pista:  base de datos relacional producido por Microsoft";
+  if (palabraAleatoria === "html" && contaFallida>=3)nodoPista.textContent = "Pista:  Lenguaje de Marcas de Hipertexto";
+  if (palabraAleatoria === "css" && contaFallida>=3)nodoPista.textContent = "Pista:  hojas de estilo en cascada";
+  if (palabraAleatoria === "react" && contaFallida>=3)nodoPista.textContent = "Pista: sirve para crear interfaces de usuario interactivas de forma sencilla";
+  if (palabraAleatoria === "vue" && contaFallida>=3)nodoPista.textContent = "Pista: framework Javascript";
+  if (palabraAleatoria === "elm" && contaFallida>=3)nodoPista.textContent = "Pista: Los programas procesan HTML a través de un DOM virtual";
+  if (palabraAleatoria === "javascript" && contaFallida>=3)nodoPista.textContent = "Pista: es un lenguaje de programación interpretado";
+  if (palabraAleatoria === "typescript" && contaFallida>=3)nodoPista.textContent = "Pista: su principal característica de Typescript es el tipado estático";
+  if (palabraAleatoria === "typescript" && contaFallida>=3)nodoPista.textContent = "Pista: su principal característica de Typescript es el tipado estático";
+  if (palabraAleatoria === "angular" && contaFallida>=3)nodoPista.textContent = "Pista:  framework desarrollado por Google";
+  if (palabraAleatoria === "sass" && contaFallida>=3)nodoPista.textContent = "Pista:  es un procesador CSS";
+  if (palabraAleatoria === "python" && contaFallida>=3)nodoPista.textContent = "Pista:  El emblema representa una imagen de serpientes de dos colores";
+  if (palabraAleatoria === "ruby" && contaFallida>=3)nodoPista.textContent = "Pista:  gema";
+  if (palabraAleatoria === "php" && contaFallida>=3)nodoPista.textContent = "Pista:   Hypertext Preprocessor";
+  if (palabraAleatoria === "perl" && contaFallida>=3)nodoPista.textContent = "Pista:  originalmente desarrollado para la manipulación de texto";
+  if (palabraAleatoria === "kotlin" && contaFallida>=3)nodoPista.textContent = "Pista:  es ideal para desarrollos basados en JVM";
+  if (palabraAleatoria === "scala" && contaFallida>=3)nodoPista.textContent = "Pista:  diseñado para expresar patrones comunes de programación en forma concisa";
+  if (palabraAleatoria === "openresty" && contaFallida>=3)nodoPista.textContent = "Pista:  fue originalmente un proyecto de empresa de Yahoo";
+  if (palabraAleatoria === "aspnet" && contaFallida>=3)nodoPista.textContent = "Pista:  es un marco de desarrollo web que se utiliza para crear excelentes aplicaciones web";
+  if (palabraAleatoria === "opengse" && contaFallida>=3)nodoPista.textContent = "Pista:  es una plataforma completa de aplicaciones geoespaciales";
+  if (palabraAleatoria === "nodejs" && contaFallida>=3)nodoPista.textContent = "Pista:  es un entorno de tiempo de ejecución de JavaScript ";
+ 
+ 
   
 }
 
