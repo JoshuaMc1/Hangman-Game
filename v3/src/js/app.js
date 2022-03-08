@@ -642,6 +642,7 @@ function seleccionarPista() {
   if (palabraAleatoria === "aspnet" && contaFallida>=3)nodoPista.textContent = "Pista:  es un marco de desarrollo web que se utiliza para crear excelentes aplicaciones web";
   if (palabraAleatoria === "opengse" && contaFallida>=3)nodoPista.textContent = "Pista:  es una plataforma completa de aplicaciones geoespaciales";
   if (palabraAleatoria === "nodejs" && contaFallida>=3)nodoPista.textContent = "Pista:  es un entorno de tiempo de ejecución de JavaScript ";
+  if (palabraAleatoria === "java" && contaFallida>=3)nodoPista.textContent = "Pista:  comercializada por primera vez en 1995 por Sun Microsystems";
  
  
   
