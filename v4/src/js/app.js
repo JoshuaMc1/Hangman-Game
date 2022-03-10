@@ -6,6 +6,10 @@ var fallos=0, aciertos=0, resultados=0, palabra_secreta='', letras_probadas='', 
 let contadorPuntos = 0;
 let numIntentos = 0;
 let estado = "";
+let estado1 = "";
+let estado2 = "";
+let con1=0;
+let con2=0;
 //variables
 let nombre = "";
 let letraUsuario = "";
@@ -34,6 +38,8 @@ function ver(e) {
   var contaPerdedor = 0;
   var contaTerminada = 0;
   var contaCancelada = 0;
+  var letraAcierto=0;
+  var letraFallo=0;
   var nombreJugador="";
 
   swal({
@@ -69,6 +75,7 @@ function ver(e) {
       letraFallo = parseInt(data.slice(6));
       graficos(contaGanador, contaPerdedor, nombreJugador);
       graficos1(contaTerminada, contaCancelada, nombreJugador);
+      graficos2(letraAcierto, letraFallo, nombreJugador);
         
       
     }
@@ -106,7 +113,7 @@ function graficos(contaGanador, contaPerdedor, nombreJugador) {
     };
 
     var chart = new google.visualization.PieChart(
-      document.getElementById("pieChart2")
+      document.getElementById("pieChart")
     );
 
     chart.draw(data, options);
@@ -120,8 +127,8 @@ function graficos1(contaTerminada, contaCancelada, nombreJugador) {
   function grafico() {
     var data = google.visualization.arrayToDataTable([
       ["Personas", "Registro de jugador"],
-      ["Sin terminar", contaTerminada],
-      ["Canceladas", contaCancelada],
+      ["Terminadas", contaTerminada],
+      ["Sin terminar", contaCancelada],
     ]);
 
     let mensaje;
@@ -144,7 +151,44 @@ function graficos1(contaTerminada, contaCancelada, nombreJugador) {
     };
 
     var chart = new google.visualization.PieChart(
-      document.getElementById("pieChart")
+      document.getElementById("pieChart1")
+    );
+
+    chart.draw(data, options);
+  }
+}
+function graficos2(letraAcierto, letraFallo, nombreJugador) {
+  google.charts.load("current", { packages: ["corechart"] });
+  google.charts.setOnLoadCallback(grafico);
+
+  function grafico() {
+    var data = google.visualization.arrayToDataTable([
+      ["Personas", "Registro de jugador"],
+      ["Letras Acertadas", letraAcierto],
+      ["Letras Fallidas", letraFallo],
+    ]);
+
+    let mensaje;
+    if (letraAcierto == 0 && letraFallo == 0) {
+      mensaje = `No hay registros`;
+    } else {
+      mensaje = `Letras acertadas y fallidas ${nombreJugador}`;
+    }
+    var options = {
+      title: mensaje,
+      pieHole: 0.4,
+      slices: {
+        0: { color: "orange" },
+        1: { color: "pink" },
+      },
+      backgroundColor: {
+        fill: "none",
+        fillOpacity: 0.1,
+      },
+    };
+
+    var chart = new google.visualization.PieChart(
+      document.getElementById("pieChart2")
     );
 
     chart.draw(data, options);
@@ -238,6 +282,7 @@ function spinners() {
 function prepararJuego(datos) {
   //// 1 Selecciono una palabra aleatoria de listaPalabra
   //// 1.1 Obtengo la posicion aleatoria
+
   mostrarLetra();
   reiniciar();
   document.getElementById("datos").style.display = "none";
@@ -280,6 +325,7 @@ function prepararJuego(datos) {
   }, 3000);
   document.getElementById("ocultar").style.display = "block";
   validarEleccion(temas, dificultad);
+
 }
 //validaciones y contadores de la tabla
 function verificarEstadoPartida() {
@@ -287,8 +333,16 @@ function verificarEstadoPartida() {
   var contadorPerdedor = 0;
   var terminadas = 0;
   var canceladas = 0;
-  if (contadorPerdedor == 0 && estado == "perder") {
-    contadorPerdedor = 0;
+  var contaAcertadas=0;
+  var contaNoAcertadas=0;
+  if (contaAcertadas === 0 ) {
+    contaAcertadas = con1;
+  }
+  if (contaNoAcertadas === 0) {
+    contaNoAcertadas = con2;
+  }
+  if (contadorPerdedor === 0 && estado === "perder") {
+    contadorPerdedor = 1;
     terminadas=1;
   }
   if (contadorGanador === 0 && estado==="ganar") {
@@ -301,6 +355,8 @@ function verificarEstadoPartida() {
     contadorPerdedor: contadorPerdedor,
     terminadas: terminadas,
     canceladas: canceladas,
+    contaAcertadas: contaAcertadas,
+    contaNoAcertadas: contaNoAcertadas
    
   };
 
@@ -310,7 +366,7 @@ function verificarEstadoPartida() {
         if (estado == "abandonar") {
           datos.canceladas++;
         }
-        if (estado === "ganar") {
+         if (estado === "ganar") {
           datos.contadorGanador++;
           datos.terminadas++;
 
@@ -319,6 +375,13 @@ function verificarEstadoPartida() {
           datos.contadorPerdedor++;
           datos.terminadas++;
 
+        }
+        if (estado1 === "acierto") {
+          datos.contaAcertadas=con1;
+        }
+         if(estado2==="fallo")
+        {
+          datos.contaNoAcertadas= con2;
         }
        
         return datos;
@@ -416,15 +479,17 @@ function incluirLetra(letra) {
 }
 //incluir fallos
 function incluirFallo(letra) {
+  estado2 = "fallo";
+  fallos++;
   let div_letras_fallidas = $('#historial'),
   html = div_letras_fallidas.html();
   letra = letra.toLowerCase();
-  fallos++;
   numIntentos --;
   $('#intentos').html(numIntentos);
   seleccionarPista();
   letras_fallidas += letra;
   letras_probadas += letra;
+
 
   if(fallos == 0){
       $('#imagen_ahorcado').attr('src', 'src/img/ahorcado0.png');
@@ -455,6 +520,8 @@ function incluirFallo(letra) {
 }
 //funcion para ganar
 function gane() {
+  con1=con1+parseInt(palabraAleatoria.length);
+  con2=con2+fallos;
   swal({
     title: `BIEN HECHO!!!`,
     text: `Has ganado!!!.
@@ -468,6 +535,7 @@ function gane() {
   reiniciar();
    contAcierto=parseInt(palabraAleatoria.length);
   estado = "ganar";
+  estado1="acierto"
   verificarEstadoPartida();
 
   setTimeout(() => {
@@ -478,9 +546,12 @@ function gane() {
 
   }, 3000);
   mostrarPalabra('gane'); 
+  
 }
 //funcion para saber si perdio
 function perdida() {
+  con2=con2+fallos;
+
   swal({
     title: `OH... HAS FALLADO!!!`,
     text: `Era ${palabraAleatoria}
@@ -488,9 +559,10 @@ function perdida() {
     icon: "error",
   });
   estado = "perder";
-  verificarEstadoPartida(estadoPerder);
+  
+  verificarEstadoPartida();
   setTimeout(() => {
-    contaFallida=0;
+    
     $('#pista').html('Aun no hay pistas disponibles...')
     prepararJuego(datos);
     document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
@@ -502,9 +574,11 @@ function perdida() {
 function probarLetra() {
   let input_probar_letra = letraUsuario;
   if (verificarLetra(input_probar_letra)) {
-    incluirLetra(input_probar_letra);   
+    incluirLetra(input_probar_letra); 
+   
 } else {
-    incluirFallo(input_probar_letra) 
+    incluirFallo(input_probar_letra);
+   
 }  
 }
 //generar la palabra aleatoria
@@ -693,6 +767,8 @@ function tablaHTML() {
       contadorPerdedor,
       terminadas,
       canceladas,
+      contaAcertadas,
+      contaNoAcertadas
      
     } = dato;
     const row = document.createElement("tr");
@@ -702,7 +778,8 @@ function tablaHTML() {
       <td>${contadorPerdedor} </td>
       <td>${terminadas} </td>
       <td>${canceladas} </td>
-     
+      <td>${contaAcertadas} </td>
+      <td>${contaNoAcertadas} </td>
       
     `;
     grilla.appendChild(row);
