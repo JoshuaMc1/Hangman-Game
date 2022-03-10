@@ -49,9 +49,6 @@
                                         <option value="Animales">Animales</option>
                                         <option value="Frutas">Frutas</option>
                                         <option value="Colores">Colores</option>
-                                        <option value="Base de datos">Base de datos</option>
-                                        <option value="Frontend">Frontend</option>
-                                        <option value="Backend">Backend</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-3 mb-2 animate__animated animate__fadeInDown animate__delay-2s">
@@ -109,6 +106,33 @@
             </div>
        
             <div class="row animate__animated animate__backInLeft animate__delay-2s">
+                <div class="col-lg-3 gap-2 mb-3">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h3
+                                class="fs-bold text-warning animate__animated animate__pulse animate__slow animate__infinite">
+                                Pistas <i class="fas fa-lightbulb"></i></h3>
+                            <p class="fs-bold" id="pista">Aun no hay pistas disponibles...</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="col-lg-7 gap-2 mb-3 text-center">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-4">
+                                    <img id="imagen_ahorcado"  src="src/img/ahorcado0.png" class="img-fluid">
+                                </div>
+                                <div class="col-lg-12 mb-2">
+                                    <div id="resultado"
+                                    class="fs-bold  contenedor-letras-secreto">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-2 gap-2 mb-3">
                     <div class="row-col-4">
                         <div class="col mb-2">
@@ -154,39 +178,14 @@
                                 <div class="card-body">
                                     <i class="fas fa-heart-broken animate__animated animate__pulse animate__slow animate__infinite"></i>
                                     <span class="fw-bold" id="historial">
-                                        Ninguna</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-7 gap-2 mb-3 text-center">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12 mb-4">
-                                    <img id="imagen_ahorcado"  src="src/img/ahorcado0.png" class="img-fluid">
-                                </div>
-                                <div class="col-lg-12 mb-2">
-                                    <div id="resultado"
-                                    class="fs-bold  contenedor-letras-secreto">
-                                    </div>
+                                        </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                
-                <div class="col-lg-3 gap-2 mb-3">
-                    <div class="card shadow">
-                        <div class="card-body">
-                            <h3
-                                class="fs-bold text-warning animate__animated animate__pulse animate__slow animate__infinite">
-                                Pistas <i class="fas fa-lightbulb"></i></h3>
-                            <p class="fs-bold" id="pista">Aun no hay pistas disponibles...</p>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
             <div class="row mb-4 animate__animated animate__backInLeft animate__delay-2s">
                 <div class="col">
@@ -200,33 +199,33 @@
                                 </div>
                                 
                                 <div class="col-lg-12 mb-3" >
-                                    <div class="container-fluid text-center" id="SelecTeclado">
-                                        <button data-id="q" class="boton tecladoD">Q</button>
-                                        <button data-id="w" class="boton tecladoD">W</button>
-                                        <button data-id="e" class="boton tecladoD">E</button>
-                                        <button data-id="r" class="boton tecladoD">R</button>
-                                        <button data-id="t" class="boton tecladoD">T</button>
-                                        <button data-id="y" class="boton tecladoD">Y</button>
-                                        <button data-id="u" class="boton tecladoD">U</button>
-                                        <button data-id="i" class="boton tecladoD">I</button>
-                                        <button data-id="o" class="boton tecladoD">O</button>
-                                        <button data-id="p" class="boton tecladoD">P</button>
-                                        <button data-id="a" class="boton tecladoD">A</button>
-                                        <button data-id="s" class="boton tecladoD">S</button>
-                                        <button data-id="d" class="boton tecladoD">D</button>
-                                        <button data-id="f" class="boton tecladoD">F</button>
-                                        <button data-id="g" class="boton tecladoD">G</button>
-                                        <button data-id="h" class="boton tecladoD">H</button>
-                                        <button data-id="j" class="boton tecladoD">J</button>
-                                        <button data-id="k" class="boton tecladoD">K</button>
-                                        <button data-id="l" class="boton tecladoD">L</button>
-                                        <button data-id="z" class="boton tecladoD">Z</button>
-                                        <button data-id="x" class="boton tecladoD">X</button>
-                                        <button data-id="c" class="boton tecladoD">C</button>
-                                        <button data-id="v" class="boton tecladoD">V</button>
-                                        <button data-id="b" class="boton tecladoD">B</button>
-                                        <button data-id="n" class="boton tecladoD">N</button>
-                                        <button data-id="m" class="boton tecladoD">M</button>
+                                    <div class="container-fluid text-center  " id="teclado">
+                                        <button data-id="q" id="q" class="boton tecladoD">Q</button>
+                                        <button data-id="w" id="w" class="boton tecladoD">W</button>
+                                        <button data-id="e" id="e" class="boton tecladoD">E</button>
+                                        <button data-id="r" id="r" class="boton tecladoD">R</button>
+                                        <button data-id="t" id="t" class="boton tecladoD">T</button>
+                                        <button data-id="y" id="y" class="boton tecladoD">Y</button>
+                                        <button data-id="u" id="u" class="boton tecladoD">U</button>
+                                        <button data-id="i" id="i" class="boton tecladoD">I</button>
+                                        <button data-id="o" id="o" class="boton tecladoD">O</button>
+                                        <button data-id="p" id="p" class="boton tecladoD">P</button>
+                                        <button data-id="a" id="a" class="boton tecladoD">A</button>
+                                        <button data-id="s" id="s" class="boton tecladoD">S</button>
+                                        <button data-id="d" id="d" class="boton tecladoD">D</button>
+                                        <button data-id="f" id="f" class="boton tecladoD">F</button>
+                                        <button data-id="g" id="g" class="boton tecladoD">G</button>
+                                        <button data-id="h" id="h" class="boton tecladoD">H</button>
+                                        <button data-id="j" id="j" class="boton tecladoD">J</button>
+                                        <button data-id="k" id="k" class="boton tecladoD">K</button>
+                                        <button data-id="l" id="l" class="boton tecladoD">L</button>
+                                        <button data-id="z" id="z" class="boton tecladoD">Z</button>
+                                        <button data-id="x" id="x" class="boton tecladoD">X</button>
+                                        <button data-id="c" id="c" class="boton tecladoD">C</button>
+                                        <button data-id="v" id="v" class="boton tecladoD">V</button>
+                                        <button data-id="b" id="b" class="boton tecladoD">B</button>
+                                        <button data-id="n" id="n" class="boton tecladoD">N</button>
+                                        <button data-id="m" id="m" class="boton tecladoD">M</button>
                                     </div>
                                 </div>
                             </div>
@@ -252,13 +251,12 @@
                             <table class="table" id="grilla" class="table list" onclick="ver(event);"> 
                                 <thead class="table-dark">
                                   
-                                        <th>Jugadores</th>
-                                        <th>Ganadas</th>
-                                        <th>Perdidas</th>
-                                        <th>Terminadas</th>
-                                        <th>Sin terminar</th>
-                                        <th>Acertadas</th>
-                                        <th>No Acertadas</th>
+                                    <th>Jugadores</th>
+                                    <th>Ganadas</th>
+                                    <th>Perdidas</th>
+                                    <th>Terminadas</th>
+                                    <th>Sin terminar</th>
+                                   
                                 </thead>
                                 <tbody>
                                     
@@ -273,9 +271,7 @@
                                 <div>
                                     <div id="pieChart" class="grafico"></div>
                                 </div>
-                                <div>
-                                    <div id="pieChart3" class="grafico"></div>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -306,10 +302,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+    <script src="src/js/app.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
-    <script src="src/js/app.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
 </body>
 
 </html>
