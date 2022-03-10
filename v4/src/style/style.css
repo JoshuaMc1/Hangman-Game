@@ -242,3 +242,18 @@ body{
       transform: scale(1.0); 
     } 
   }
+
+  .fondo{
+    height:755px;
+    background-repeat: repeat-y;
+    background-size: 10rem;
+  }
+ 
+    .abs-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 10vh;
+      width: 450px;
+    }
+  
