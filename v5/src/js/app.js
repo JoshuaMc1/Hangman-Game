@@ -461,7 +461,7 @@ function mostrarPalabra(opcion) {
       }
   }
   $('#resultado').html(html);
-  $('#imagen_ahorcado').attr('src', 'src/img/ahorcado5.png');
+  if(estado2==="fallo")$('#imagen_ahorcado').attr('src', 'src/img/ahorcado5.png');
   
 }
 //incluir la letra
