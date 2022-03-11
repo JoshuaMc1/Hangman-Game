@@ -248,28 +248,7 @@ body{
     background-repeat: repeat-y;
     background-size: 10rem;
   }
- 
-    .abs-center {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 10vh;
-      width: 450px;
-    }
-
-    .contenido-hero {
-      background-color: rgb(0 0 0 / 70%); /** Otra opción **/
-      background-color: rgba(0, 0, 0, .7);
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: row;
-     align-items:center;
-     justify-content: center;
-  }
-
- 
+  
 @media (min-width: 768px) {
   .dos-columnas {
       display: flex;

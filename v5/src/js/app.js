@@ -461,6 +461,7 @@ function mostrarPalabra(opcion) {
       }
   }
   $('#resultado').html(html);
+  $('#imagen_ahorcado').attr('src', 'src/img/ahorcado5.png');
   
 }
 //incluir la letra
@@ -514,6 +515,7 @@ function incluirFallo(letra) {
   div_letras_fallidas.html(html);
 
   if (fallos === 5) {
+    
       perdida();
       //div_letras_fallidas.html("");
   }
@@ -553,16 +555,12 @@ function perdida() {
   con1=con1+aciertos;
   con2=con2+fallos;
 
-  swal({
-    title: `OH... HAS FALLADO!!!`,
-    text: `Era ${palabraAleatoria}
-                  `,
-    icon: "error",
-  });
+
   estado = "perder";
   
   verificarEstadoPartida();
   setTimeout(() => {
+    
     
     $('#pista').html('Aun no hay pistas disponibles...')
     prepararJuego(datos);
