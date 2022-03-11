@@ -1,7 +1,7 @@
 //arreglos
-var listaPalabras = [];
-var arregloTabla = [];
-var fallos = 0,
+let listaPalabras = [];
+let arregloTabla = [];
+let fallos = 0,
   aciertos = 0,
   resultados = 0,
   palabra_secreta = "",
@@ -20,10 +20,7 @@ let letraUsuario = "";
 let palabraAleatoria = "";
 const agregar = document.querySelector("#agregar");
 const abandonar = document.querySelector("#abandonar");
-var tecladito = document.getElementById("teclado");
-let table = document.getElementsByTagName("table")[0];
-let tbody = table.getElementsByTagName("tbody")[0];
-
+let tecladito = document.getElementById("teclado");
 //evento escucha clic
 cargarEventListenrs();
 function cargarEventListenrs() {
@@ -38,13 +35,15 @@ function cargarEventListenrs() {
 //funcion para dar clic a la tabla y muestre el grafico
 function ver(e) {
   e.preventDefault();
-  var contaGanador = 0;
-  var contaPerdedor = 0;
-  var contaTerminada = 0;
-  var contaCancelada = 0;
-  var letraAcierto = 0;
-  var letraFallo = 0;
-  var nombreJugador = "";
+  let table = document.getElementsByTagName("table")[0];
+  let tbody = table.getElementsByTagName("tbody")[0];
+  let contaGanador = 0;
+  let contaPerdedor = 0;
+  let contaTerminada = 0;
+  let contaCancelada = 0;
+  let letraAcierto = 0;
+  let letraFallo = 0;
+  let nombreJugador = "";
 
   swal({
     title: "Graficos",
@@ -56,14 +55,14 @@ function ver(e) {
     if (willDelete) {
       document.getElementById("datos").style.display = "block";
       e = e || window.event;
-      var data = [];
-      var target = e.srcElement || e.target;
+      let data = [];
+      let target = e.srcElement || e.target;
       while (target && target.nodeName !== "TR") {
         target = target.parentNode;
       }
       if (target) {
-        var cells = target.getElementsByTagName("td");
-        for (var i = 0; i < cells.length; i++) {
+        let cells = target.getElementsByTagName("td");
+        for (let i = 0; i < cells.length; i++) {
           data.push(cells[i].innerHTML);
         }
       }
@@ -99,7 +98,7 @@ function graficos(contaGanador, contaPerdedor, nombreJugador) {
     } else {
       mensaje = `Partidas ganadas y perdidas por ${nombreJugador}`;
     }
-    var options = {
+    let options = {
       title: mensaje,
       pieHole: 0.4,
       slices: {
@@ -112,7 +111,7 @@ function graficos(contaGanador, contaPerdedor, nombreJugador) {
       },
     };
 
-    var chart = new google.visualization.PieChart(
+    let chart = new google.visualization.PieChart(
       document.getElementById("pieChart")
     );
 
@@ -137,7 +136,7 @@ function graficos1(contaTerminada, contaCancelada, nombreJugador) {
     } else {
       mensaje = `Partidas terminadas y canceladas por ${nombreJugador}`;
     }
-    var options = {
+    let options = {
       title: mensaje,
       pieHole: 0.4,
       slices: {
@@ -150,7 +149,7 @@ function graficos1(contaTerminada, contaCancelada, nombreJugador) {
       },
     };
 
-    var chart = new google.visualization.PieChart(
+    let chart = new google.visualization.PieChart(
       document.getElementById("pieChart1")
     );
 
@@ -174,7 +173,7 @@ function graficos2(letraAcierto, letraFallo, nombreJugador) {
     } else {
       mensaje = `Letras acertadas y fallidas ${nombreJugador}`;
     }
-    var options = {
+    let options = {
       title: mensaje,
       pieHole: 0.4,
       slices: {
@@ -187,7 +186,7 @@ function graficos2(letraAcierto, letraFallo, nombreJugador) {
       },
     };
 
-    var chart = new google.visualization.PieChart(
+    let chart = new google.visualization.PieChart(
       document.getElementById("pieChart2")
     );
 
@@ -280,7 +279,6 @@ function spinners() {
 function prepararJuego(datos) {
   //// 1 Selecciono una palabra aleatoria de listaPalabra
   //// 1.1 Obtengo la posicion aleatoria
-
   mostrarLetra();
   reiniciar();
   document.getElementById("datos").style.display = "none";
@@ -326,12 +324,12 @@ function prepararJuego(datos) {
 }
 //validaciones y contadores de la tabla
 function verificarEstadoPartida() {
-  var contadorGanador = 0;
-  var contadorPerdedor = 0;
-  var terminadas = 0;
-  var canceladas = 0;
-  var contaAcertadas = 0;
-  var contaNoAcertadas = 0;
+  let contadorGanador = 0;
+  let contadorPerdedor = 0;
+  let terminadas = 0;
+  let canceladas = 0;
+  let contaAcertadas = 0;
+  let contaNoAcertadas = 0;
   if (contaAcertadas === 0) {
     contaAcertadas = con1;
   }
@@ -564,7 +562,7 @@ function probarLetra() {
 }
 //generar la palabra aleatoria
 function palabraAleatorias() {
-  var i, posAleatoriaListaPalabras;
+  let i, posAleatoriaListaPalabras;
   for (i = listaPalabras.length; i; i--) {
     posAleatoriaListaPalabras = Math.floor(Math.random() * i);
     palabraAleatoria = listaPalabras[i - 1];
@@ -931,10 +929,10 @@ function reiniciar() {
 }
 // limpiar las filas de la tabla
 function vaciarHTML() {
-  var elmtTable = document.getElementById("grilla");
-  var tableRows = elmtTable.getElementsByTagName("tr");
-  var rowCount = tableRows.length;
-  for (var i = rowCount - 1; i > 0; i--) {
+  let elmtTable = document.getElementById("grilla");
+  let tableRows = elmtTable.getElementsByTagName("tr");
+  let rowCount = tableRows.length;
+  for (let i = rowCount - 1; i > 0; i--) {
     elmtTable.removeChild(tableRows[i]);
   }
   sincronizarStorage();
