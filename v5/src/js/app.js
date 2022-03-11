@@ -10,6 +10,7 @@ let estado1 = "";
 let estado2 = "";
 let con1=0;
 let con2=0;
+let perdi0=false;
 //variables
 let nombre = "";
 let letraUsuario = "";
@@ -461,7 +462,6 @@ function mostrarPalabra(opcion) {
       }
   }
   $('#resultado').html(html);
-  if(estado2==="fallo")$('#imagen_ahorcado').attr('src', 'src/img/ahorcado5.png');
   
 }
 //incluir la letra
@@ -559,6 +559,8 @@ function perdida() {
   estado = "perder";
   
   verificarEstadoPartida();
+  $('#imagen_ahorcado').attr('src', 'src/img/ahorcado5.png');
+
   setTimeout(() => {
     
     
@@ -568,6 +570,8 @@ function perdida() {
 
   }, 3000);
   mostrarPalabra('perdida');
+  perdio=true;
+
 }
 //probar la letra
 function probarLetra() {
@@ -736,6 +740,7 @@ function seleccionarPista() {
 function reiniciar() {
   mostrarLetra(this);
   listaPalabras = [];
+  perdio=false;
   canceladas = 0;
   fallos=0;
   aciertos=0;
