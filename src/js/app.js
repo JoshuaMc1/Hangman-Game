@@ -16,6 +16,7 @@ let con1 = 0;
 let con2 = 0;
 //variables
 let nombre = "";
+let temas="";
 let letraUsuario = "";
 let palabraAleatoria = "";
 const agregar = document.querySelector("#agregar");
@@ -100,7 +101,7 @@ function graficos(contaGanador, contaPerdedor, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      pieHole: 0.4,
+      pieHole: 0.1,
       slices: {
         0: { color: "red" },
         1: { color: "blue" },
@@ -138,10 +139,10 @@ function graficos1(contaTerminada, contaCancelada, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      pieHole: 0.4,
+      pieHole: 0.1,
       slices: {
         0: { color: "green" },
-        1: { color: "yellow" },
+        1: { color: "purple" },
       },
       backgroundColor: {
         fill: "none",
@@ -175,10 +176,10 @@ function graficos2(letraAcierto, letraFallo, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      pieHole: 0.4,
+      pieHole: 0.1,
       slices: {
         0: { color: "orange" },
-        1: { color: "pink" },
+        1: { color: "navy" },
       },
       backgroundColor: {
         fill: "none",
@@ -289,7 +290,7 @@ function prepararJuego(datos) {
   spinner.style.display = "flex";
   const conversion = document.getElementById("nombre").value;
   nombre = conversion.charAt(0).toUpperCase() + conversion.slice(1);
-  var temas = document.getElementById("temas").value;
+  temas = document.getElementById("temas").value;
   var dificultad = document.getElementById("dificultad").value;
 
   if (nombre === "") {
@@ -586,6 +587,7 @@ function generarEspacio() {
   }
   $("#resultado").html(html);
   $("#nombreUsuario").html(nombre);
+  $("#tema").html(temas);
 }
 // validar el tema y nivel de jugada
 function validarEleccion(temas, dificultad) {

@@ -11,6 +11,7 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="src/style/style.css" />
     <title>Hangman Game</title>
@@ -120,7 +121,7 @@
                             <div class="card-body">
                                 <h3
                                     class="fs-bold text-warning animate__animated animate__pulse animate__slow animate__infinite">
-                                    Pistas <i class="fas fa-lightbulb"></i>
+                                    Pistas <i class="fa-solid fa-lightbulb"></i>
                                 </h3>
                                 <p class="fs-bold" id="pista">
                                     Aun no hay pistas disponibles...
@@ -130,24 +131,29 @@
                     </div>
 
                     <div class="col-lg-7 gap-2 mb-3 text-center">
-                        <div class="card shadow">
-                            <div class="card-body">
+                        <div class="card shadow ">
+                            <div class="card-body margen">
                                 <div class="row">
                                     <div class="dos-columnas">
                                         <div class="division">
                                             <i
-                                                class="fas fa-user text-warning animate__animated animate__pulse animate__slow animate__infinite"></i>
-                                            <label class="fw-bold" id="nombreUsuario">Sin nombre</label>
+                                                class="fa-solid fa-user text-warning animate__animated animate__pulse animate__slow animate__infinite"></i>
+                                            <label class="fw-bold text-white " id="nombreUsuario">Sin nombre</label>
                                         </div>
                                         <div class="division">
                                             <i
-                                                class="fas fa-heart text-warning animate__animated animate__pulse animate__slow animate__infinite"></i>
-                                            <label class="fw-bold" id="intentos">0 </label>
+                                                class="fa-solid fa-dice text-warning animate__animated animate__pulse animate__slow animate__infinite"></i>
+                                            <label class="fw-bold text-white " id="tema">Tema</label>
                                         </div>
                                         <div class="division">
                                             <i
-                                                class="fas fa-star text-warning animate__animated animate__pulse animate__slow animate__infinite"></i>
-                                            <label class="fw-bold" id="puntos">0 </label>
+                                                class="fa-solid fa-heart text-warning animate__animated animate__pulse animate__slow animate__infinite"></i>
+                                            <label class="fw-bold text-white " id="intentos">0 </label>
+                                        </div>
+                                        <div class="division">
+
+                                            <i class="fa-solid fa-trophy text-warning "></i>
+                                            <label class="fw-bold text-white " id="puntos">0 </label>
                                         </div>
                                     </div>
 
@@ -170,7 +176,7 @@
                                     </div>
                                     <div class="card-body">
                                         <i
-                                            class="fas fa-heart-broken animate__animated animate__pulse animate__slow animate__infinite"></i>
+                                            class="fa-solid fa-heart-crack animate__animated animate__pulse animate__slow animate__infinite text-warning "></i>
                                         <span class="fw-bold" id="historial"> </span>
                                     </div>
                                 </div>

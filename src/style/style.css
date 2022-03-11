@@ -251,10 +251,18 @@ body{
   
 
   .dos-columnas {
-      display: flex;
-      justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 2rem;
+        padding: 1rem;
+      background-color: darkgrey;
   }
+ 
 
   .division{
       flex: 0 0 calc(33.3% - 1rem);
+  }
+  .margen{
+    margin: .2rem 1rem 1rem 1rem;
+    padding:0;
   }
