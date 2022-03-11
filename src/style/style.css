@@ -263,6 +263,6 @@ body{
       flex: 0 0 calc(33.3% - 1rem);
   }
   .margen{
-    margin: .2rem 1rem 1rem 1rem;
+    margin: -0.1rem 0.7rem 0 0.7rem;
     padding:0;
   }

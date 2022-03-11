@@ -1,24 +1,18 @@
 //arreglos
 let listaPalabras = [];
 let arregloTabla = [];
-let fallos = 0,
-  aciertos = 0,
-  resultados = 0,
-  palabra_secreta = "",
-  letras_probadas = "",
-  letras_fallidas = "";
+let fallos = 0, aciertos = 0;
 let contadorPuntos = 0;
 let numIntentos = 0;
 let estado = "";
-let estado1 = "";
-let estado2 = "";
-let con1 = 0;
-let con2 = 0;
-//variables
+let estadoAciertos = "";
+let estadoFallos = "";
+let conAcietos = 0;
+let conFallos = 0;
 let nombre = "";
 let temas="";
 let letraUsuario = "";
-let palabraAleatoria = "";
+let palabraAleatoria = ""
 const agregar = document.querySelector("#agregar");
 const abandonar = document.querySelector("#abandonar");
 let tecladito = document.getElementById("teclado");
@@ -296,21 +290,18 @@ function prepararJuego(datos) {
   if (nombre === "") {
     mostrarError("Falta llenar el campo de nombre");
     document.querySelector("#nombre").focus();
-    activar();
     spinners();
     return;
   }
   if (temas === "") {
     mostrarError("Falta seleccionar un tema");
     document.querySelector("#temas").focus();
-    activar();
     spinners();
     return;
   }
   if (dificultad === "") {
     mostrarError("Falta seleccionar la dificultad");
     document.querySelector("#dificultad").focus();
-    activar();
     spinners();
     return;
   }
@@ -322,272 +313,6 @@ function prepararJuego(datos) {
   }, 3000);
   document.getElementById("ocultar").style.display = "block";
   validarEleccion(temas, dificultad);
-}
-//validaciones y contadores de la tabla
-function verificarEstadoPartida() {
-  let contadorGanador = 0;
-  let contadorPerdedor = 0;
-  let terminadas = 0;
-  let canceladas = 0;
-  let contaAcertadas = 0;
-  let contaNoAcertadas = 0;
-  if (contaAcertadas === 0) {
-    contaAcertadas = con1;
-  }
-  if (contaNoAcertadas === 0) {
-    contaNoAcertadas = con2;
-  }
-  if (contadorPerdedor === 0 && estado === "perder") {
-    contadorPerdedor = 1;
-    terminadas = 1;
-  }
-  if (contadorGanador === 0 && estado === "ganar") {
-    contadorGanador = 1;
-    terminadas = 1;
-  }
-  const infoDatos = {
-    nombre: nombre,
-    contadorGanador: contadorGanador,
-    contadorPerdedor: contadorPerdedor,
-    terminadas: terminadas,
-    canceladas: canceladas,
-    contaAcertadas: contaAcertadas,
-    contaNoAcertadas: contaNoAcertadas,
-  };
-
-  if (arregloTabla.some((datos) => datos.nombre === infoDatos.nombre)) {
-    const dato = arregloTabla.map((datos) => {
-      if (datos.nombre === infoDatos.nombre) {
-        if (estado == "abandonar") {
-          datos.canceladas++;
-        }
-        if (estado === "ganar") {
-          datos.contadorGanador++;
-          datos.terminadas++;
-        }
-        if (estado === "perder") {
-          datos.contadorPerdedor++;
-          datos.terminadas++;
-        }
-        if (estado1 === "acierto") {
-          datos.contaAcertadas = con1;
-        }
-        if (estado2 === "fallo") {
-          datos.contaNoAcertadas = con2;
-        }
-
-        return datos;
-      } else {
-        return datos;
-      }
-    });
-    arregloTabla = [...dato];
-  } else {
-    arregloTabla = [...arregloTabla, infoDatos];
-  }
-  reiniciar();
-
-  tablaHTML();
-}
-//local storage
-function sincronizarStorage() {
-  localStorage.setItem("grillaTabla", JSON.stringify(arregloTabla));
-}
-//verificar letra probada
-function verificarLetraProbada(letra) {
-  letra = letra.toLowerCase();
-  if (letras_probadas.indexOf(letra) != -1) {
-    return true;
-  } else {
-    return false;
-  }
-}
-//verificar letra
-function verificarLetra(letra) {
-  letra = letra.toLowerCase();
-  if (palabraAleatoria.indexOf(letra) != -1) {
-    return true;
-  } else {
-    return false;
-  }
-}
-//establecer espacios
-function establecerEspacios() {
-  let html = "";
-  for (let i = 0; i < palabraAleatoria.length; i++) {
-    if (palabraAleatoria.charAt(i) == " ") {
-      html += `
-          <span class='espacio'></span>
-          `;
-    } else {
-      html += `
-          <span class='letra'></span>
-          `;
-    }
-  }
-
-  $("#resultado").html(html);
-}
-//crear el span
-function escribirSpan(indice, letraUsuario) {
-  let lista_span = $("span");
-  for (let i = 0; i < lista_span.length; i++) {
-    if (i == indice) {
-      lista_span[i].innerHTML = letraUsuario;
-    }
-  }
-}
-//funcion para mostrar la palabra
-function mostrarPalabra(opcion) {
-  let html = "";
-  for (let i = 0; i < palabraAleatoria.length; i++) {
-    if (palabraAleatoria.charAt(i) == " ") {
-      html += `
-              <span class='espacio'>${palabraAleatoria.charAt(i)}</span>
-          `;
-    } else {
-      html += `
-              <span class='letra letra-${opcion}'>${palabraAleatoria.charAt(
-        i
-      )}</span>
-          `;
-    }
-  }
-  $("#resultado").html(html);
-}
-//incluir la letra
-function incluirLetra(letra) {
-  letra = letra.toLowerCase();
-  for (let i = 0; i < palabraAleatoria.length; i++) {
-    if (palabraAleatoria.charAt(i) == letra) {
-      escribirSpan(i, letra);
-      letras_probadas += letra;
-      aciertos++;
-    }
-  }
-  if (aciertos == palabraAleatoria.replace(new RegExp(" ", "g"), "").length) {
-    gane();
-  }
-}
-//incluir fallos
-function incluirFallo(letra) {
-  estado2 = "fallo";
-  fallos++;
-  let div_letras_fallidas = $("#historial"),
-  html = div_letras_fallidas.html();
-  letra = letra.toLowerCase();
-  numIntentos--;
-  $("#intentos").html(numIntentos);
-  seleccionarPista();
-  letras_fallidas += letra;
-  letras_probadas += letra;
-
-  if (fallos == 0) {
-    $("#imagen_ahorcado").attr("src", "src/img/ahorcado0.png");
-  } else if (fallos == 1) {
-    $("#imagen_ahorcado").attr("src", "src/img/ahorcado1.png");
-  } else if (fallos == 2) {
-    $("#imagen_ahorcado").attr("src", "src/img/ahorcado2.png");
-  } else if (fallos == 3) {
-    $("#imagen_ahorcado").attr("src", "src/img/ahorcado3.png");
-  } else if (fallos == 4) {
-    $("#imagen_ahorcado").attr("src", "src/img/ahorcado4.png");
-  } else if (fallos == 5) {
-    $("#imagen_ahorcado").attr("src", "src/img/ahorcado5.png");
-  }
-
-  if (html == "") {
-    html = letra;
-  } else {
-    html += "-" + letra;
-  }
-
-  div_letras_fallidas.html(html);
-
-  if (fallos === 5) {
-    perdida();
-    //div_letras_fallidas.html("");
-  }
-}
-//funcion para ganar
-function gane() {
-  con1 = con1 + aciertos;
-  con2 = con2 + fallos;
-  swal({
-    title: `BIEN HECHO!!!`,
-    text: `Has ganado!!!.
-                  `,
-    icon: "success",
-  });
-
-  contadorPuntos++;
-  $("#puntos").html(contadorPuntos);
-  reiniciar();
-  estado = "ganar";
-  estado1 = "acierto";
-  verificarEstadoPartida();
-
-  setTimeout(() => {
-    contaFallida = 0;
-    $("#pista").html("Aun no hay pistas disponibles...");
-    prepararJuego(datos);
-    document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
-  }, 3000);
-  mostrarPalabra("gane");
-}
-//funcion para saber si perdio
-function perdida() {
-  con1 = con1 + aciertos;
-  con2 = con2 + fallos;
-
-  estado = "perder";
-  verificarEstadoPartida();
-  $("#imagen_ahorcado").attr("src", "src/img/ahorcado5.png");
-
-  setTimeout(() => {
-    $("#pista").html("Aun no hay pistas disponibles...");
-    prepararJuego(datos);
-    document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
-  }, 3000);
-  mostrarPalabra("perdida");
-  perdio = true;
-}
-//probar la letra
-function probarLetra() {
-  let input_probar_letra = letraUsuario;
-  if (verificarLetra(input_probar_letra)) {
-    incluirLetra(input_probar_letra);
-  } else {
-    incluirFallo(input_probar_letra);
-  }
-}
-//generar la palabra aleatoria
-function palabraAleatorias() {
-  let i, posAleatoriaListaPalabras;
-  for (i = listaPalabras.length; i; i--) {
-    posAleatoriaListaPalabras = Math.floor(Math.random() * i);
-    palabraAleatoria = listaPalabras[i - 1];
-    listaPalabras[i - 1] = listaPalabras[posAleatoriaListaPalabras];
-    listaPalabras[posAleatoriaListaPalabras] = palabraAleatoria;
-  }
-}
-//generar espacios
-function generarEspacio() {
-  let html = "";
-  for (let i = 0; i < palabraAleatoria.length; i++) {
-    if (palabraAleatoria.charAt(i) == " ") {
-      html += `
-          <span class='espacio'></span>
-          `;
-    } else {
-      html += `
-          <span class='letra'></span>
-          `;
-    }
-  }
-  $("#resultado").html(html);
-  $("#nombreUsuario").html(nombre);
-  $("#tema").html(temas);
 }
 // validar el tema y nivel de jugada
 function validarEleccion(temas, dificultad) {
@@ -689,34 +414,124 @@ function validarEleccion(temas, dificultad) {
   palabraAleatorias();
   generarEspacio();
 }
-//abandonar partida
-function abandonarParti(e) {
-  e.preventDefault();
-  if (e.target.classList.contains("abandonar")) {
-    const datosSeleccionado = e.target.parentElement.parentElement;
-    abandonarPartida(datosSeleccionado);
-    activar();
+//generar la palabra aleatoria
+function palabraAleatorias() {
+  let i, posAleatoriaListaPalabras;
+  for (i = listaPalabras.length; i; i--) {
+    posAleatoriaListaPalabras = Math.floor(Math.random() * i);
+    palabraAleatoria = listaPalabras[i - 1];
+    listaPalabras[i - 1] = listaPalabras[posAleatoriaListaPalabras];
+    listaPalabras[posAleatoriaListaPalabras] = palabraAleatoria;
   }
 }
-//abandonar partida y aumentar contador
-function abandonarPartida(datos) {
-  if (canceladas == 0) {
-    canceladas = 1;
+//generar espacios
+function generarEspacio() {
+  let html = "";
+  for (let i = 0; i < palabraAleatoria.length; i++) {
+    if (palabraAleatoria.charAt(i) == " ") {
+      html += `
+          <span class='espacio'></span>
+          `;
+    } else {
+      html += `
+          <span class='letra'></span>
+          `;
+    }
   }
-  estado = "abandonar";
-  verificarEstadoPartida(estado);
-  location.reload(true);
+  $("#resultado").html(html);
+  $("#nombreUsuario").html(nombre);
+  $("#tema").html(temas);
 }
-//mostrar un mensaje si se deja el campo vacio
-function mostrarError(error) {
-  const mensajeError = document.createElement("p");
-  mensajeError.textContent = error;
-  mensajeError.classList.add("error");
-  const contenido = document.querySelector("#mensaje");
-  contenido.appendChild(mensajeError);
-  setTimeout(() => {
-    mensajeError.remove();
-  }, 3000);
+//crear el span
+function escribirSpan(indice, letraUsuario) {
+  let lista_span = $("span");
+  for (let i = 0; i < lista_span.length; i++) {
+    if (i == indice) {
+      lista_span[i].innerHTML = letraUsuario;
+    }
+  }
+}
+//incluir la letra
+function incluirLetra(letra) {
+  letra = letra.toLowerCase();
+  for (let i = 0; i < palabraAleatoria.length; i++) {
+    if (palabraAleatoria.charAt(i) == letra) {
+      escribirSpan(i, letra);
+      aciertos++;
+    }
+  }
+  if (aciertos == palabraAleatoria.replace(new RegExp(" ", "g"), "").length) {
+    gane();
+  }
+}
+//local storage
+function sincronizarStorage() {
+  localStorage.setItem("grillaTabla", JSON.stringify(arregloTabla));
+}
+//verificar letra probada
+function verificarLetraProbada(letra) {
+  letra = letra.toLowerCase();
+  if (letras_probadas.indexOf(letra) != -1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+//verificar letra
+function verificarLetra(letra) {
+  letra = letra.toLowerCase();
+  if (palabraAleatoria.indexOf(letra) != -1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+//probar la letra
+function probarLetra() {
+  let input_probar_letra = letraUsuario;
+  if (verificarLetra(input_probar_letra)) {
+    incluirLetra(input_probar_letra);
+  } else {
+    incluirFallo(input_probar_letra);
+  }
+}
+//incluir fallos
+function incluirFallo(letra) {
+  estadoFallos = "fallo";
+  fallos++;
+  let div_letras_fallidas = $("#historial"),
+  html = div_letras_fallidas.html();
+  letra = letra.toLowerCase();
+  numIntentos--;
+  $("#intentos").html(numIntentos);
+  seleccionarPista();
+  
+  if (fallos == 0) {
+    $("#imagen_ahorcado").attr("src", "src/img/ahorcado0.png");
+  } else if (fallos == 1) {
+    $("#imagen_ahorcado").attr("src", "src/img/ahorcado1.png");
+  } else if (fallos == 2) {
+    $("#imagen_ahorcado").attr("src", "src/img/ahorcado2.png");
+  } else if (fallos == 3) {
+    $("#imagen_ahorcado").attr("src", "src/img/ahorcado3.png");
+  } else if (fallos == 4) {
+    $("#imagen_ahorcado").attr("src", "src/img/ahorcado4.png");
+  } else if (fallos == 5) {
+    $("#imagen_ahorcado").attr("src", "src/img/ahorcado5.png");
+  }
+  //validacion para el historial
+  if (html == "") {
+    html = letra;
+  } else {
+    html += "-" + letra;
+  }
+
+  div_letras_fallidas.html(html);
+
+  if (fallos === 5) {
+    perdida();
+    //div_letras_fallidas.html("");
+  }
 }
 //mostrar la pista despues del tercer fallo
 function seleccionarPista() {
@@ -915,18 +730,165 @@ function seleccionarPista() {
       "Pista:  comercializada por primera vez en 1995 por Sun Microsystems"
     );
 }
+//funcion para ganar
+function gane() {
+  conAcietos = conAcietos + aciertos;
+  conFallos = conFallos + fallos;
+  swal({
+    title: `BIEN HECHO!!!`,
+    text: `Has ganado!!!.
+                  `,
+    icon: "success",
+  });
+  contadorPuntos++;
+  $("#puntos").html(contadorPuntos);
+  reiniciar();
+  estado = "ganar";
+  estadoAciertos = "acierto";
+  verificarEstadoPartida();
+  setTimeout(() => {
+    contaFallida = 0;
+    $("#pista").html("Aun no hay pistas disponibles...");
+    prepararJuego(datos);
+    document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+  }, 3000);
+  mostrarPalabra("gane");
+}
+//funcion para saber si perdio
+function perdida() {
+  conAcietos = conAcietos + aciertos;
+  conFallos = conFallos + fallos;
+  estado = "perder";
+  verificarEstadoPartida();
+  $("#imagen_ahorcado").attr("src", "src/img/ahorcado5.png");
+  setTimeout(() => {
+    $("#pista").html("Aun no hay pistas disponibles...");
+    prepararJuego(datos);
+    document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+  }, 3000);
+  mostrarPalabra("perdida");
+  perdio = true;
+}
+//validaciones y contadores de la tabla
+function verificarEstadoPartida() {
+  let contadorGanador = 0;
+  let contadorPerdedor = 0;
+  let terminadas = 0;
+  let canceladas = 0;
+  let contaAcertadas = 0;
+  let contaNoAcertadas = 0;
+  if (contaAcertadas === 0) {
+    contaAcertadas = conAcietos;
+  }
+  if (contaNoAcertadas === 0) {
+    contaNoAcertadas = conFallos;
+  }
+  if (contadorPerdedor === 0 && estado === "perder") {
+    contadorPerdedor = 1;
+    terminadas = 1;
+  }
+  if (contadorGanador === 0 && estado === "ganar") {
+    contadorGanador = 1;
+    terminadas = 1;
+  }
+  const infoDatos = {
+    nombre: nombre,
+    contadorGanador: contadorGanador,
+    contadorPerdedor: contadorPerdedor,
+    terminadas: terminadas,
+    canceladas: canceladas,
+    contaAcertadas: contaAcertadas,
+    contaNoAcertadas: contaNoAcertadas,
+  };
+
+  if (arregloTabla.some((datos) => datos.nombre === infoDatos.nombre)) {
+    const dato = arregloTabla.map((datos) => {
+      if (datos.nombre === infoDatos.nombre) {
+        if (estado == "abandonar") {
+          datos.canceladas++;
+        }
+        if (estado === "ganar") {
+          datos.contadorGanador++;
+          datos.terminadas++;
+        }
+        if (estado === "perder") {
+          datos.contadorPerdedor++;
+          datos.terminadas++;
+        }
+        if (estadoAciertos === "acierto") {
+          datos.contaAcertadas = conAcietos;
+        }
+        if (estadoFallos === "fallo") {
+          datos.contaNoAcertadas = conFallos;
+        }
+
+        return datos;
+      } else {
+        return datos;
+      }
+    });
+    arregloTabla = [...dato];
+  } else {
+    arregloTabla = [...arregloTabla, infoDatos];
+  }
+  reiniciar();
+  tablaHTML();
+}
+//funcion para mostrar la palabra
+function mostrarPalabra(opcion) {
+  let html = "";
+  for (let i = 0; i < palabraAleatoria.length; i++) {
+    if (palabraAleatoria.charAt(i) == " ") {
+      html += `
+              <span class='espacio'>${palabraAleatoria.charAt(i)}</span>
+          `;
+    } else {
+      html += `
+              <span class='letra letra-${opcion}'>${palabraAleatoria.charAt(
+        i
+      )}</span>
+          `;
+    }
+  }
+  $("#resultado").html(html);
+}
+//abandonar partida
+function abandonarParti(e) {
+  e.preventDefault();
+  if (e.target.classList.contains("abandonar")) {
+    const datosSeleccionado = e.target.parentElement.parentElement;
+    abandonarPartida(datosSeleccionado);
+    activar();
+  }
+}
+//abandonar partida y aumentar contador
+function abandonarPartida(datos) {
+  if (canceladas == 0) {
+    canceladas = 1;
+  }
+  estado = "abandonar";
+  verificarEstadoPartida(estado);
+  location.reload(true);
+}
+//mostrar un mensaje si se deja el campo vacio
+function mostrarError(error) {
+  const mensajeError = document.createElement("p");
+  mensajeError.textContent = error;
+  mensajeError.classList.add("error");
+  const contenido = document.querySelector("#mensaje");
+  contenido.appendChild(mensajeError);
+  setTimeout(() => {
+    mensajeError.remove();
+  }, 3000);
+}
 //reiniciar arreglos y contadores
 function reiniciar() {
   mostrarLetra(this);
-  listaPalabras = [];
-  perdio = false;
+  $("#historial").html("");
   canceladas = 0;
   fallos = 0;
   aciertos = 0;
   resultados = 0;
-  palabra_secreta = "";
-  letras_probadas = "";
-  letras_fallidas = "";
   document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
 }
 // limpiar las filas de la tabla
