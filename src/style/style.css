@@ -243,13 +243,6 @@ body{
     } 
   }
 
-  .fondo{
-    height:755px;
-    background-repeat: repeat-y;
-    background-size: 10rem;
-  }
-  
-
   .dos-columnas {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -258,7 +251,6 @@ body{
       background-color: darkgrey;
   }
  
-
   .division{
       flex: 0 0 calc(33.3% - 1rem);
   }

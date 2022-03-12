@@ -95,7 +95,7 @@ function graficos(contaGanador, contaPerdedor, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      pieHole: 0.1,
+      
       slices: {
         0: { color: "red" },
         1: { color: "blue" },
@@ -133,7 +133,7 @@ function graficos1(contaTerminada, contaCancelada, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      pieHole: 0.1,
+     
       slices: {
         0: { color: "green" },
         1: { color: "purple" },
@@ -170,7 +170,7 @@ function graficos2(letraAcierto, letraFallo, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      pieHole: 0.1,
+      
       slices: {
         0: { color: "orange" },
         1: { color: "navy" },
@@ -453,6 +453,8 @@ function escribirSpan(indice, letraUsuario) {
 }
 //incluir la letra
 function incluirLetra(letra) {
+  let div_letras_fallidas = $("#acertadas"),
+  html = div_letras_fallidas.html();
   letra = letra.toLowerCase();
   for (let i = 0; i < palabraAleatoria.length; i++) {
     if (palabraAleatoria.charAt(i) == letra) {
@@ -463,6 +465,14 @@ function incluirLetra(letra) {
   if (aciertos == palabraAleatoria.replace(new RegExp(" ", "g"), "").length) {
     gane();
   }
+    //validacion para el historial
+    if (html == "") {
+      html = letra;
+    } else {
+      html += " " + letra;
+    }
+  
+    div_letras_fallidas.html(html);
 }
 //local storage
 function sincronizarStorage() {
@@ -884,12 +894,13 @@ function mostrarError(error) {
 //reiniciar arreglos y contadores
 function reiniciar() {
   mostrarLetra(this);
-  $("#historial").html("");
   canceladas = 0;
   fallos = 0;
   aciertos = 0;
   resultados = 0;
   document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+  $("#historial").html("");
+  $("#acertadas").html("");
 }
 // limpiar las filas de la tabla
 function vaciarHTML() {

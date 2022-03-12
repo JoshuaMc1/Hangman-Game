@@ -83,9 +83,7 @@
                                         </div>
                                         <div id="loaders"></div>
                                     </div>
-                                    <div class="col-lg-12 mb-4 text-center">
-                                        <img class="img-fluid" src="src/img/gif.gif" alt="ahorcado animado" />
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -116,19 +114,36 @@
                 </div>
 
                 <div class="row animate__animated animate__backInLeft animate__delay-2s">
-                    <div class="col-lg-3 gap-2 mb-3">
-                        <div class="card shadow">
-                            <div class="card-body">
-                                <h3
-                                    class="fs-bold text-warning animate__animated animate__pulse animate__slow animate__infinite">
-                                    Pistas <i class="fa-solid fa-lightbulb"></i>
-                                </h3>
-                                <p class="fs-bold" id="pista">
-                                    Aun no hay pistas disponibles...
-                                </p>
+                    <div class="col-lg-2 gap-2 mb-3">
+                        <div class="row-col-4">
+                            <div class="col mb-2">
+                                <div class="card shadow">
+                                    <div class="card-header bg-primary text-white">
+                                        <h6 class="fw-bold">Letras acertadas:</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <i
+                                            class="fa-solid fa-check-double animate__animated animate__pulse animate__slow animate__infinite text-warning "></i>
+                                        <label class="fw-bold" id="acertadas"> </label>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            <div class="col mb-2">
+                                <div class="card shadow">
+                                    <div class="card-header bg-danger text-white">
+                                        <h6 class="fw-bold">Letras falladas:</h6>
+                                    </div>
+                                    <div class="card-body">
+                                        <i
+                                            class="fa-solid fa-heart-crack animate__animated animate__pulse animate__slow animate__infinite text-warning "></i>
+                                        <label class="fw-bold" id="historial"> </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                  
 
                     <div class="col-lg-7 gap-2 mb-3 text-center">
                         <div class="card shadow ">
@@ -167,22 +182,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-2 gap-2 mb-3">
-                        <div class="row-col-4">
-                            <div class="col mb-2">
-                                <div class="card shadow">
-                                    <div class="card-header bg-danger text-white">
-                                        <h6 class="fw-bold">Letras falladas:</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <i
-                                            class="fa-solid fa-heart-crack animate__animated animate__pulse animate__slow animate__infinite text-warning "></i>
-                                        <span class="fw-bold" id="historial"> </span>
-                                    </div>
-                                </div>
+
+                    <div class="col-lg-3 gap-2 mb-3">
+                        <div class="card shadow">
+                            <div class="card-body">
+                                <h3
+                                    class="fs-bold text-warning animate__animated animate__pulse animate__slow animate__infinite">
+                                    Pistas <i class="fa-solid fa-lightbulb"></i>
+                                </h3>
+                                <p class="fs-bold" id="pista">
+                                    Aun no hay pistas disponibles...
+                                </p>
                             </div>
                         </div>
                     </div>
+                  
                 </div>
                 <div class="row mb-4 animate__animated animate__backInLeft animate__delay-2s">
                     <div class="col">
@@ -304,8 +318,8 @@
                                     <th>Ganadas</th>
                                     <th>Perdidas</th>
                                     <th>Terminadas</th>
-                                    <th>Sin terminar</th>
-                                    <th>Acertadas</th>
+                                    <th>Sin Terminar</th>
+                                    <th>Letra Acertadas</th>
                                     <th>No Acertadas</th>
                                 </tr>
                                 <tbody></tbody>
