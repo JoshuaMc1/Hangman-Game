@@ -12,7 +12,9 @@ let conFallos = 0;
 let nombre = "";
 let temas = "";
 let letraUsuario = "";
-let palabraAleatoria = ""
+let palabraAleatoria = "";
+let primeraVez=false;
+
 const agregar = document.querySelector("#agregar");
 const abandonar = document.querySelector("#abandonar");
 let tecladito = document.getElementById("teclado");
@@ -267,7 +269,7 @@ function agregarGrilla(e) {
 function spinners() {
   setTimeout(() => {
     spinner.style.display = "none";
-    setTimeout(() => { }, 400);
+    setTimeout(() => { }, 300);
   }, 3000);
 }
 //comenzar a jugar
@@ -276,6 +278,7 @@ function prepararJuego(datos) {
   //// 1.1 Obtengo la posicion aleatoria
   mostrarLetra();
   reiniciar();
+  primeraVez=true;
   document.getElementById("datos").style.display = "none";
   numIntentos = 5;
   $("#intentos").html(numIntentos);
@@ -309,7 +312,7 @@ function prepararJuego(datos) {
     spinner.style.display = "none";
     setTimeout(() => {
       document.getElementById("mostrar").style.display = "none";
-    }, 400);
+    }, 300);
   }, 3000);
   document.getElementById("ocultar").style.display = "block";
   validarEleccion(temas, dificultad);
@@ -414,30 +417,60 @@ function validarEleccion(temas, dificultad) {
   palabraAleatorias();
   generarEspacio();
 }
+
+
 //generar la palabra aleatoria
 function palabraAleatorias() {
-  let i, posAleatoriaListaPalabras;
-  for (i = listaPalabras.length; i; i--) {
-    posAleatoriaListaPalabras = Math.floor(Math.random() * i);
-    palabraAleatoria = listaPalabras[i - 1];
-    listaPalabras[i - 1] = listaPalabras[posAleatoriaListaPalabras];
-    listaPalabras[posAleatoriaListaPalabras] = palabraAleatoria;
+
+  if(primeraVez===true) {
+    let posAleatoriaListaPalabras = _.random(listaPalabras.length - 1);
+    //// 1.2 Obtengo la palabra aleatoria
+    palabraAleatoria = listaPalabras[posAleatoriaListaPalabras];
+    var index = posAleatoriaListaPalabras;
+    listaPalabras.splice(index, 1);
+  }else{
+   
+    palabraAleatoria = listaPalabras[posAleatoriaListaPalabras];
+    var index = posAleatoriaListaPalabras;
+    listaPalabras.splice(index, 1); 
   }
-}
+  }
+ 
+  
+
+ 
+
 //generar espacios
 function generarEspacio() {
   let html = "";
-  for (let i = 0; i < palabraAleatoria.length; i++) {
-    if (palabraAleatoria.charAt(i) == " ") {
-      html += `
-          <span class='espacio'></span>
-          `;
-    } else {
-      html += `
-          <span class='letra'></span>
-          `;
-    }
+ 
+  if(palabraAleatoria !==undefined){
+    for (let i = 0; i < palabraAleatoria.length; i++) {
+    
+  
+      if (palabraAleatoria.charAt(i) == " ") {
+        html += `
+            <span class='espacio'></span>
+            `;
+      } else {
+        html += `
+            <span class='letra'></span>
+            `;
+      }
+     
   }
+  }else{
+    swal({
+      title: `Fin del juego!!!`,
+      text: `Acerto todas las palabras!!!.
+                    `,
+      icon: "success",
+    });
+    setTimeout(() => {
+      location.reload(true);
+    }, 3000);
+  }
+  
   $("#resultado").html(html);
   $("#nombreUsuario").html(nombre);
   $("#tema").html(temas);
@@ -759,7 +792,10 @@ function gane() {
   setTimeout(() => {
     contaFallida = 0;
     $("#pista").html("Aun no hay pistas disponibles...");
-    prepararJuego(datos);
+    palabraAleatorias();
+    generarEspacio();
+    mostrarLetra(this);
+
     document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
   }, 3000);
   mostrarPalabra("gane");
@@ -773,7 +809,9 @@ function perdida() {
   $("#imagen_ahorcado").attr("src", "src/img/ahorcado5.png");
   setTimeout(() => {
     $("#pista").html("Aun no hay pistas disponibles...");
-    prepararJuego(datos);
+    palabraAleatorias();
+    generarEspacio();
+    mostrarLetra(this);
     document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
   }, 3000);
   mostrarPalabra("perdida");
