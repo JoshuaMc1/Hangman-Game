@@ -585,7 +585,7 @@ function seleccionarPista() {
     $("#pista").html("Pista: son mitades de albaricoques");
   if (palabraAleatoria === "orejones de melocoton" && fallos >= 3)
     $("#pista").html("Pista: son mitades de melocoton");
-  if (palabraAleatoria === "verdeo liva" && fallos >= 3)
+  if (palabraAleatoria === "verde oliva" && fallos >= 3)
     $("#pista").html("Pista: color y palmera");
   if (palabraAleatoria === "amarillo lima" && fallos >= 3)
     $("#pista").html("Pista: color y fruta");
@@ -689,9 +689,9 @@ function seleccionarPista() {
     );
   if (palabraAleatoria === "javascript" && fallos >= 3)
     $("#pista").html("Pista: es un lenguaje de programación interpretado");
-  if (palabraAleatoria === "typescript" && fallos >= 3)
+  if (palabraAleatoria === "jquery" && fallos >= 3)
     $("#pista").html(
-      "Pista: su principal característica de Typescript es el tipado estático"
+      "Pista: consiste en un único fichero JavaScript que contiene las funcionalidades comunes de DOM"
     );
   if (palabraAleatoria === "typescript" && fallos >= 3)
     $("#pista").html(
