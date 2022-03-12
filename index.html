@@ -11,7 +11,9 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="src/style/style.css" />
     <title>Hangman Game</title>
@@ -65,7 +67,7 @@
                                     </div>
 
                                     <div class="col-lg-3 mb-2 align-middle d-grid">
-                                        <button 
+                                        <button
                                             class="btn btn-outline-success rounded fw-bold animate__animated animate__bounceIn animate__slow animate__delay-2s agregar"
                                             id="jugar" data-nombre="">
                                             <i class="fas fa-play"></i> EMPEZAR A JUGAR
@@ -83,7 +85,6 @@
                                         </div>
                                         <div id="loaders"></div>
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div>
@@ -97,12 +98,11 @@
                             <div class="card-body">
                                 <div class="d-grid">
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal1"  id="clasificacion">
+                                        <button type="button" class="btn bg-purple" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal1" id="clasificacion">
                                             <i class="fas fa-table"></i> Tabla de clasificación |
                                             <i class="fas fa-chart-pie"></i> Graficas
                                         </button>
-
                                         <button type="button" class="btn btn-danger abandonar" id="abandonar">
                                             <i class="fas fa-times-circle"></i> Abandonar partida
                                         </button>
@@ -126,7 +126,6 @@
                                             class="fa-solid fa-check-double animate__animated animate__pulse animate__slow animate__infinite text-warning "></i>
                                         <label class="fw-bold" id="acertadas"> </label>
                                     </div>
-                                  
                                 </div>
                             </div>
                             <div class="col mb-2">
@@ -143,8 +142,6 @@
                             </div>
                         </div>
                     </div>
-                  
-
                     <div class="col-lg-7 gap-2 mb-3 text-center">
                         <div class="card shadow ">
                             <div class="card-body margen">
@@ -171,9 +168,9 @@
                                             <label class="fw-bold text-white " id="puntos">0 </label>
                                         </div>
                                     </div>
-
                                     <div class="col-lg-12 mb-4">
-                                        <img id="imagen_ahorcado" src="src/img/ahorcado0.png" alt="imagen de ahorcado" class="img-fluid" />
+                                        <img id="imagen_ahorcado" src="src/img/ahorcado0.png" alt="imagen de ahorcado"
+                                            class="img-fluid" />
                                     </div>
                                     <div class="col-lg-12 mb-2">
                                         <div id="resultado" class="fs-bold contenedor-letras-secreto"></div>
@@ -182,7 +179,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-3 gap-2 mb-3">
                         <div class="card shadow">
                             <div class="card-body">
@@ -196,7 +192,6 @@
                             </div>
                         </div>
                     </div>
-                  
                 </div>
                 <div class="row mb-4 animate__animated animate__backInLeft animate__delay-2s">
                     <div class="col">
@@ -209,7 +204,6 @@
                                             Teclado <i class="fas fa-keyboard"></i>
                                         </h3>
                                     </div>
-
                                     <div class="col-lg-12 mb-3">
                                         <div class="container-fluid text-center" id="teclado">
                                             <button data-id="q" id="q" class="boton tecladoD">
@@ -306,53 +300,67 @@
                 <div class="modal-dialog modal-lg modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title text-success" id="exampleModalLabel">
-                                <i class="fas fa-table"></i> Tabla de clasificación
+                            <h4 class="modal-title text-purple" id="exampleModalLabel">
+                                <i class="fas fa-table"></i> Datos y estadisticas
                             </h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body" id="grillaTabla">
-                            <table class="table list" id="grilla" onclick="ver(event);">
-                                <tr class="table-dark">
-                                    <th>Jugadores</th>
-                                    <th>Ganadas</th>
-                                    <th>Perdidas</th>
-                                    <th>Terminadas</th>
-                                    <th>Sin Terminar</th>
-                                    <th>Letra Acertadas</th>
-                                    <th>No Acertadas</th>
-                                </tr>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                        <div class="" id="datos">
-                            <div class="">
-                                <div>
-                                    <div id="pieChart" class="grafico"></div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12 mb-3">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5 class="fw-bold text-purple">Tabla de clasificación</h5>
+                                        </div>
+                                        <div class="card-body tabla" id="grillaTabla">
+                                            <table class="table" id="grilla" onclick="ver(event);">
+                                                <tr class="bg-purple">
+                                                    <th>Jugadores</th>
+                                                    <th>Ganadas</th>
+                                                    <th>Perdidas</th>
+                                                    <th>Terminadas</th>
+                                                    <th>Sin Terminar</th>
+                                                    <th>Letra Acertadas</th>
+                                                    <th>No Acertadas</th>
+                                                </tr>
+                                                <tbody></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <div id="pieChart1" class="grafico"></div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="card shadow">
+                                        <div class="card-header">
+                                            <h5 class="fw-bold text-purple">Grafico de partidas ganas y perdidas</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="pieChart" class="grafico"></div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <div id="pieChart2" class="grafico"></div>
+                                <div class="col-lg-6 mb-3">
+                                    <div class="card shadow">
+                                        <div class="card-header">
+                                            <h5 class="fw-bold text-purple">Grafico de partidas terminadas y canceladas</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="pieChart1" class="grafico"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 mb-3">
+                                    <div class="card shadow">
+                                        <div class="card-header">
+                                            <h5 class="fw-bold text-purple">Grafico de letras acertadas y falladas</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div id="pieChart2" class="grafico"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!--Modal 2-->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel1"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title text-purple" id="exampleModalLabel1">
-                                <i class="fas fa-chart-pie"></i> Graficos y estadisticas
-                            </h4>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">...</div>
+                        <div id="datos"></div>
                     </div>
                 </div>
             </div>
@@ -367,7 +375,7 @@
         crossorigin="anonymous"></script>
     <script src="src/js/app.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script  src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

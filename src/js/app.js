@@ -10,7 +10,7 @@ let estadoFallos = "";
 let conAcietos = 0;
 let conFallos = 0;
 let nombre = "";
-let temas="";
+let temas = "";
 let letraUsuario = "";
 let palabraAleatoria = ""
 const agregar = document.querySelector("#agregar");
@@ -95,7 +95,7 @@ function graficos(contaGanador, contaPerdedor, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      
+
       slices: {
         0: { color: "red" },
         1: { color: "blue" },
@@ -133,7 +133,7 @@ function graficos1(contaTerminada, contaCancelada, nombreJugador) {
     }
     let options = {
       title: mensaje,
-     
+
       slices: {
         0: { color: "green" },
         1: { color: "purple" },
@@ -170,7 +170,7 @@ function graficos2(letraAcierto, letraFallo, nombreJugador) {
     }
     let options = {
       title: mensaje,
-      
+
       slices: {
         0: { color: "orange" },
         1: { color: "navy" },
@@ -267,7 +267,7 @@ function agregarGrilla(e) {
 function spinners() {
   setTimeout(() => {
     spinner.style.display = "none";
-    setTimeout(() => {}, 400);
+    setTimeout(() => { }, 400);
   }, 3000);
 }
 //comenzar a jugar
@@ -454,7 +454,7 @@ function escribirSpan(indice, letraUsuario) {
 //incluir la letra
 function incluirLetra(letra) {
   let div_letras_fallidas = $("#acertadas"),
-  html = div_letras_fallidas.html();
+    html = div_letras_fallidas.html();
   letra = letra.toLowerCase();
   for (let i = 0; i < palabraAleatoria.length; i++) {
     if (palabraAleatoria.charAt(i) == letra) {
@@ -465,14 +465,14 @@ function incluirLetra(letra) {
   if (aciertos == palabraAleatoria.replace(new RegExp(" ", "g"), "").length) {
     gane();
   }
-    //validacion para el historial
-    if (html == "") {
-      html = letra;
-    } else {
-      html += " " + letra;
-    }
-  
-    div_letras_fallidas.html(html);
+  //validacion para el historial
+  if (html == "") {
+    html = letra;
+  } else {
+    html += " " + letra;
+  }
+
+  div_letras_fallidas.html(html);
 }
 //local storage
 function sincronizarStorage() {
@@ -510,12 +510,12 @@ function incluirFallo(letra) {
   estadoFallos = "fallo";
   fallos++;
   let div_letras_fallidas = $("#historial"),
-  html = div_letras_fallidas.html();
+    html = div_letras_fallidas.html();
   letra = letra.toLowerCase();
   numIntentos--;
   $("#intentos").html(numIntentos);
   seleccionarPista();
-  
+
   if (fallos == 0) {
     $("#imagen_ahorcado").attr("src", "src/img/ahorcado0.png");
   } else if (fallos == 1) {
