@@ -17,6 +17,7 @@ let primeraVez=false;
 
 const agregar = document.querySelector("#agregar");
 const abandonar = document.querySelector("#abandonar");
+const verGrafico = document.querySelector("#grilla");
 let tecladito = document.getElementById("teclado");
 //evento escucha clic
 cargarEventListenrs();
@@ -24,6 +25,7 @@ function cargarEventListenrs() {
   agregar.addEventListener("click", agregarGrilla);
   abandonar.addEventListener("click", abandonarParti);
   tecladito.addEventListener("click", tecladoDinamico);
+  verGrafico.addEventListener("dblclick", ver);
   document.addEventListener("DOMContentLoaded", () => {
     arregloTabla = JSON.parse(localStorage.getItem("grillaTabla")) || [];
     tablaHTML();
@@ -114,7 +116,6 @@ function setIcon(element, asc) {
   if (asc) element.addClass("asc");
   else element.addClass("desc");
 }
-
 //grafico de ganador y perdedor
 function graficos(contaGanador, contaPerdedor, nombreJugador) {
   google.charts.load("current", { packages: ["corechart"] });
@@ -473,11 +474,6 @@ function palabraAleatorias() {
     listaPalabras.splice(index, 1); 
   }
   }
- 
-  
-
- 
-
 //generar espacios
 function generarEspacio() {
   let html = "";
