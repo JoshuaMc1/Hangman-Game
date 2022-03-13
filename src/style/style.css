@@ -6,6 +6,7 @@
   --color-winner: #27a745;
   --color-lose: #dc3645;
   --color-azul: #0288d1;
+  --color-plomo: #d9d9d9;
 }
 
 *{
@@ -16,6 +17,10 @@
 
 body{
   background: linear-gradient(to right, var(--color-morado-oscuro), var(--color-morado-claro));
+}
+
+.text-plomo{
+  color: var(--color-plomo);
 }
 
 .text-dec{
