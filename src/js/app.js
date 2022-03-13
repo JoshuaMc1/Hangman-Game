@@ -16,6 +16,7 @@ let palabraAleatoria = "";
 let primeraVez=false;
 
 const agregar = document.querySelector("#agregar");
+const salirJuego = document.querySelector("#salir");
 const abandonar = document.querySelector("#abandonar");
 const verGrafico = document.querySelector("#grilla");
 let tecladito = document.getElementById("teclado");
@@ -24,6 +25,7 @@ cargarEventListenrs();
 function cargarEventListenrs() {
   agregar.addEventListener("click", agregarGrilla);
   abandonar.addEventListener("click", abandonarParti);
+  salirJuego.addEventListener("click", terminar);
   tecladito.addEventListener("click", tecladoDinamico);
   verGrafico.addEventListener("dblclick", ver);
   document.addEventListener("DOMContentLoaded", () => {
@@ -80,7 +82,6 @@ function ver(e) {
     }
   });
 }
-
 $('th').click(function() {
   var table = $(this).parents('table').eq(0)
   var rows = table.find('tr:gt(0)').toArray().sort(comparer($(this).index()))
@@ -93,7 +94,6 @@ $('th').click(function() {
   }
   setIcon($(this), this.asc);
 })
-
 function comparer(index) {
   return function(a, b) {
     var valA = getCellValue(a, index),
@@ -101,11 +101,9 @@ function comparer(index) {
     return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
   }
 }
-
 function getCellValue(row, index) {
   return $(row).children('td').eq(index).html()
 }
-
 function setIcon(element, asc) {
   $("th").each(function(index) {
     $(this).removeClass("sorting");
@@ -344,9 +342,11 @@ function spinners() {
 function prepararJuego(datos) {
   //// 1 Selecciono una palabra aleatoria de listaPalabra
   //// 1.1 Obtengo la posicion aleatoria
+
   mostrarLetra();
   reiniciar();
   primeraVez=true;
+  document.getElementById("salir").disabled = true;
   document.getElementById("datos").style.display = "none";
   numIntentos = 5;
   $("#intentos").html(numIntentos);
@@ -485,8 +485,6 @@ function validarEleccion(temas, dificultad) {
   palabraAleatorias();
   generarEspacio();
 }
-
-
 //generar la palabra aleatoria
 function palabraAleatorias() {
 
@@ -509,8 +507,6 @@ function generarEspacio() {
  
   if(palabraAleatoria !==undefined){
     for (let i = 0; i < palabraAleatoria.length; i++) {
-    
-  
       if (palabraAleatoria.charAt(i) == " ") {
         html += `
             <span class='espacio'></span>
@@ -520,7 +516,6 @@ function generarEspacio() {
             <span class='letra'></span>
             `;
       }
-     
   }
   }else{
     swal({
@@ -531,9 +526,8 @@ function generarEspacio() {
     });
     desactivarLetra();
     document.getElementById("abandonar").disabled = true;
-   
+    document.getElementById("salir").disabled = false;
   }
-  
   $("#resultado").html(html);
   $("#nombreUsuario").html(nombre);
   $("#tema").html(temas);
@@ -567,7 +561,6 @@ function incluirLetra(letra) {
   } else {
     html += " " + letra;
   }
-
   div_letras_fallidas.html(html);
 }
 //local storage
@@ -611,7 +604,6 @@ function incluirFallo(letra) {
   numIntentos--;
   $("#intentos").html(numIntentos);
   seleccionarPista();
-
   if (fallos == 0) {
     $("#imagen_ahorcado").attr("src", "src/img/ahorcado0.png");
   } else if (fallos == 1) {
@@ -631,9 +623,7 @@ function incluirFallo(letra) {
   } else {
     html += "-" + letra;
   }
-
   div_letras_fallidas.html(html);
-
   if (fallos === 5) {
     perdida();
     //div_letras_fallidas.html("");
@@ -641,200 +631,82 @@ function incluirFallo(letra) {
 }
 //mostrar la pista despues del tercer fallo
 function seleccionarPista() {
-  if (palabraAleatoria === "caballo" && fallos >= 3)
-    $("#pista").html("Pista: animal que físicamente poseen un gran porte");
-  if (palabraAleatoria === "oveja" && fallos >= 3)
-    $("#pista").html("Pista: produce carne y lana");
-  if (palabraAleatoria === "cerdo" && fallos >= 3)
-    $("#pista").html("Pista: cuadrúpedo con patas cortas y pezuñas");
-  if (palabraAleatoria === "chimpance" && fallos >= 3)
-    $("#pista").html("Pista: pariente mas cercano de los humanos");
-  if (palabraAleatoria === "blanco" && fallos >= 3)
-    $("#pista").html("Pista: color de la nieve");
-  if (palabraAleatoria === "naranja" && fallos >= 3)
-    $("#pista").html("Pista: es color y fruta");
-  if (palabraAleatoria === "azul" && fallos >= 3)
-    $("#pista").html("Pista: color del cielo");
-  if (palabraAleatoria === "negro" && fallos >= 3)
-    $("#pista").html("Pista: es la ausencia de luz");
-  if (palabraAleatoria === "mango" && fallos >= 3)
-    $("#pista").html("Pista: maduro es dulce, y ácido cuando aún está verde");
-  if (palabraAleatoria === "fresa" && fallos >= 3)
-    $("#pista").html("Pista: generalmente a las personas presumidas");
-  if (palabraAleatoria === "cereza" && fallos >= 3)
-    $("#pista").html("Pista: Las palabras y las ------ unas con otras se ");
-  if (palabraAleatoria === "nance" && fallos >= 3)
-    $("#pista").html("Pista: un viejito con tres pelitos en el culito");
-  if (palabraAleatoria === "caballito de mar" && fallos >= 3)
-    $("#pista").html("Pista: posee un cuello como de caballo");
-  if (palabraAleatoria === "leon marino" && fallos >= 3)
-    $("#pista").html("Pista: comparte muchas caracteristica con a foca");
-  if (palabraAleatoria === "estrella de mar" && fallos >= 3)
-    $("#pista").html("Pista: posee cinco brazos");
-  if (palabraAleatoria === "oso panda" && fallos >= 3)
-    $("#pista").html("Pista: animal que practica el kung fu");
-  if (palabraAleatoria === "ciruela pasa" && fallos >= 3)
-    $("#pista").html("Pista: fruta desnutrida");
-  if (palabraAleatoria === "higo seco" && fallos >= 3)
-    $("#pista").html("Pista: resultado de la deshidratacion del higo");
-  if (palabraAleatoria === "orejones de albaricoque" && fallos >= 3)
-    $("#pista").html("Pista: son mitades de albaricoques");
-  if (palabraAleatoria === "orejones de melocoton" && fallos >= 3)
-    $("#pista").html("Pista: son mitades de melocoton");
-  if (palabraAleatoria === "verde oliva" && fallos >= 3)
-    $("#pista").html("Pista: color y palmera");
-  if (palabraAleatoria === "amarillo lima" && fallos >= 3)
-    $("#pista").html("Pista: color y fruta");
-  if (palabraAleatoria === "lavanda floral" && fallos >= 3)
-    $("#pista").html("Pista: color y flor");
-  if (palabraAleatoria === "azul marino" && fallos >= 3)
-    $("#pista").html("Pista: color y referente al mar");
-  if (palabraAleatoria === "leon" && fallos >= 3)
-    $("#pista").html("Pista: Rey de la Selva");
-  if (palabraAleatoria === "iguana" && fallos >= 3)
-    $("#pista").html("Pista:  animal ovíparo, reptil");
-  if (palabraAleatoria === "elefante" && fallos >= 3)
-    $("#pista").html("Pista:  posee una larga trompa");
-  if (palabraAleatoria === "ardilla" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  son auténticas acróbatas, saltan de un arbol a otro"
-    );
-  if (palabraAleatoria === "cocodrilo" && fallos >= 3)
-    $("#pista").html("Pista:  su alimentación es carnívora, reptil");
-  if (palabraAleatoria === "zorro" && fallos >= 3)
-    $("#pista").html("Pista:  astuto");
-  if (palabraAleatoria === "papaya" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  la pulpa es roja anaranjada o amarilla, dulce y muy jugosa"
-    );
-  if (palabraAleatoria === "kiwi" && fallos >= 3)
-    $("#pista").html("Pista:  contribuye a la salud digestiva");
-  if (palabraAleatoria === "banano" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  es considera una planta, pero en realidad es una hierba"
-    );
-  if (palabraAleatoria === "manzana" && fallos >= 3)
-    $("#pista").html("Pista: su es forma redonda y sabor muy dulce");
-  if (palabraAleatoria === "caqui" && fallos >= 3)
-    $("#pista").html("Pista: son ideal para desintoxicar el organismo");
-  if (palabraAleatoria === "uva" && fallos >= 3)
-    $("#pista").html(
-      "Pista: ayuda para mantener una presión arterial saludable"
-    );
-  if (palabraAleatoria === "coco" && fallos >= 3)
-    $("#pista").html("Pista: se puede beber su agua sin romper la cáscara");
-  if (palabraAleatoria === "maracuya" && fallos >= 3)
-    $("#pista").html("Pista: su fruto es una baya");
-  if (palabraAleatoria === "marron" && fallos >= 3)
-    $("#pista").html(
-      "Pista: se asocia frecuentemente con emociones desagradables"
-    );
-  if (palabraAleatoria === "rosa" && fallos >= 3)
-    $("#pista").html("Pista: se asocia a la pantera");
-  if (palabraAleatoria === "turqueza" && fallos >= 3)
-    $("#pista").html("Pista: se le conoce como verde azulado");
-  if (palabraAleatoria === "cian" && fallos >= 3)
-    $("#pista").html("Pista: se deriva de un celeste saturado");
-  if (palabraAleatoria === "rojo" && fallos >= 3)
-    $("#pista").html("Pista: color primario");
-  if (palabraAleatoria === "zafiro" && fallos >= 3)
-    $("#pista").html("Pista: mineral");
-  if (palabraAleatoria === "mysql" && fallos >= 3)
-    $("#pista").html("Pista: My Structured Query Language");
-  if (palabraAleatoria === "orientdb" && fallos >= 3)
-    $("#pista").html("Pista: base de datos orientado a documentos");
-  if (palabraAleatoria === "couchdb" && fallos >= 3)
-    $("#pista").html(
-      "Pista: se utiliza para facilitar la accesibilidad y compatibilidad web con una diversidad de dispositivos."
-    );
-  if (palabraAleatoria === "mariadb" && fallos >= 3)
-    $("#pista").html("Pista: se deriva de MySQL");
-  if (palabraAleatoria === "mongodb" && fallos >= 3)
-    $("#pista").html("Pista: del inglés humongous, 'enorme'");
-  if (palabraAleatoria === "postgresql" && fallos >= 3)
-    $("#pista").html("Pista:  también llamado Postgres");
-  if (palabraAleatoria === "firebird" && fallos >= 3)
-    $("#pista").html("Pista:  pájaro de fuego");
-  if (palabraAleatoria === "oracle database" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  fundada por la empresa de consultoría Software Development Laboratories "
-    );
-  if (palabraAleatoria === "inter systems cache" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  se utuliza para la gestión de grandes volúmenes de datos"
-    );
-  if (palabraAleatoria === "microsoft access" && fallos >= 3)
-    $("#pista").html("Pista:  sucesor de Embedded Basic");
-  if (palabraAleatoria === "microsoft sql server" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  base de datos relacional producido por Microsoft"
-    );
-  if (palabraAleatoria === "html" && fallos >= 3)
-    $("#pista").html("Pista:  Lenguaje de Marcas de Hipertexto");
-  if (palabraAleatoria === "css" && fallos >= 3)
-    $("#pista").html("Pista:  hojas de estilo en cascada");
-  if (palabraAleatoria === "react" && fallos >= 3)
-    $("#pista").html(
-      "Pista: sirve para crear interfaces de usuario interactivas de forma sencilla"
-    );
-  if (palabraAleatoria === "vue" && fallos >= 3)
-    $("#pista").html("Pista: framework Javascript");
-  if (palabraAleatoria === "elm" && fallos >= 3)
-    $("#pista").html(
-      "Pista: Los programas procesan HTML a través de un DOM virtual"
-    );
-  if (palabraAleatoria === "java script" && fallos >= 3)
-    $("#pista").html("Pista: es un lenguaje de programación interpretado");
-  if (palabraAleatoria === "jquery" && fallos >= 3)
-    $("#pista").html(
-      "Pista: consiste en un único fichero JavaScript que contiene las funcionalidades comunes de DOM"
-    );
-  if (palabraAleatoria === "type script" && fallos >= 3)
-    $("#pista").html(
-      "Pista: su principal característica de Typescript es el tipado estático"
-    );
-  if (palabraAleatoria === "angular" && fallos >= 3)
-    $("#pista").html("Pista:  framework desarrollado por Google");
-  if (palabraAleatoria === "sass" && fallos >= 3)
-    $("#pista").html("Pista:  es un procesador CSS");
-  if (palabraAleatoria === "python" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  El emblema representa una imagen de serpientes de dos colores"
-    );
-  if (palabraAleatoria === "ruby" && fallos >= 3)
-    $("#pista").html("Pista:  gema");
-  if (palabraAleatoria === "php" && fallos >= 3)
-    $("#pista").html("Pista:   Hypertext Preprocessor");
-  if (palabraAleatoria === "perl" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  originalmente desarrollado para la manipulación de texto"
-    );
-  if (palabraAleatoria === "kotlin" && fallos >= 3)
-    $("#pista").html("Pista:  es ideal para desarrollos basados en JVM");
-  if (palabraAleatoria === "scala" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  diseñado para expresar patrones comunes de programación en forma concisa"
-    );
-  if (palabraAleatoria === "open resty" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  fue originalmente un proyecto de empresa de Yahoo"
-    );
-  if (palabraAleatoria === "asp net" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  es un marco de desarrollo web que se utiliza para crear excelentes aplicaciones web"
-    );
-  if (palabraAleatoria === "visual basic" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  es un lenguaje orientado a objetivos"
-    );
-  if (palabraAleatoria === "assembly language" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  es un lenguaje de bajo nivel "
-    );
-  if (palabraAleatoria === "java" && fallos >= 3)
-    $("#pista").html(
-      "Pista:  comercializada por primera vez en 1995 por Sun Microsystems"
-    );
+  if (palabraAleatoria === "caballo" && fallos >= 3)$("#pista").html("Pista: animal que físicamente poseen un gran porte");
+  if (palabraAleatoria === "oveja" && fallos >= 3)$("#pista").html("Pista: produce carne y lana");
+  if (palabraAleatoria === "cerdo" && fallos >= 3)$("#pista").html("Pista: cuadrúpedo con patas cortas y pezuñas");
+  if (palabraAleatoria === "chimpance" && fallos >= 3)$("#pista").html("Pista: pariente mas cercano de los humanos");
+  if (palabraAleatoria === "blanco" && fallos >= 3)$("#pista").html("Pista: color de la nieve");
+  if (palabraAleatoria === "naranja" && fallos >= 3)$("#pista").html("Pista: es color y fruta");
+  if (palabraAleatoria === "azul" && fallos >= 3)$("#pista").html("Pista: color del cielo");
+  if (palabraAleatoria === "negro" && fallos >= 3)$("#pista").html("Pista: es la ausencia de luz");
+  if (palabraAleatoria === "mango" && fallos >= 3)$("#pista").html("Pista: maduro es dulce, y ácido cuando aún está verde");
+  if (palabraAleatoria === "fresa" && fallos >= 3)$("#pista").html("Pista: generalmente a las personas presumidas");
+  if (palabraAleatoria === "cereza" && fallos >= 3)$("#pista").html("Pista: Las palabras y las ------ unas con otras se ");
+  if (palabraAleatoria === "nance" && fallos >= 3)$("#pista").html("Pista: un viejito con tres pelitos en el culito");
+  if (palabraAleatoria === "caballito de mar" && fallos >= 3)$("#pista").html("Pista: posee un cuello como de caballo");
+  if (palabraAleatoria === "leon marino" && fallos >= 3)$("#pista").html("Pista: comparte muchas caracteristica con a foca");
+  if (palabraAleatoria === "estrella de mar" && fallos >= 3)$("#pista").html("Pista: posee cinco brazos");
+  if (palabraAleatoria === "oso panda" && fallos >= 3)$("#pista").html("Pista: animal que practica el kung fu");
+  if (palabraAleatoria === "ciruela pasa" && fallos >= 3)$("#pista").html("Pista: fruta desnutrida");
+  if (palabraAleatoria === "higo seco" && fallos >= 3)$("#pista").html("Pista: resultado de la deshidratacion del higo");
+  if (palabraAleatoria === "orejones de albaricoque" && fallos >= 3)$("#pista").html("Pista: son mitades de albaricoques");
+  if (palabraAleatoria === "orejones de melocoton" && fallos >= 3)$("#pista").html("Pista: son mitades de melocoton");
+  if (palabraAleatoria === "verde oliva" && fallos >= 3)$("#pista").html("Pista: color y palmera");
+  if (palabraAleatoria === "amarillo lima" && fallos >= 3)$("#pista").html("Pista: color y fruta");
+  if (palabraAleatoria === "lavanda floral" && fallos >= 3)$("#pista").html("Pista: color y flor");
+  if (palabraAleatoria === "azul marino" && fallos >= 3)$("#pista").html("Pista: color y referente al mar");
+  if (palabraAleatoria === "leon" && fallos >= 3)$("#pista").html("Pista: Rey de la Selva");
+  if (palabraAleatoria === "iguana" && fallos >= 3)$("#pista").html("Pista:  animal ovíparo, reptil");
+  if (palabraAleatoria === "elefante" && fallos >= 3)$("#pista").html("Pista:  posee una larga trompa");
+  if (palabraAleatoria === "ardilla" && fallos >= 3)$("#pista").html( "Pista:  son auténticas acróbatas, saltan de un arbol a otro");
+  if (palabraAleatoria === "cocodrilo" && fallos >= 3)$("#pista").html("Pista:  su alimentación es carnívora, reptil");
+  if (palabraAleatoria === "zorro" && fallos >= 3)$("#pista").html("Pista:  astuto");
+  if (palabraAleatoria === "papaya" && fallos >= 3)$("#pista").html("Pista:  la pulpa es roja anaranjada o amarilla, dulce y muy jugosa");
+  if (palabraAleatoria === "kiwi" && fallos >= 3)$("#pista").html("Pista:  contribuye a la salud digestiva");
+  if (palabraAleatoria === "banano" && fallos >= 3)$("#pista").html("Pista:  es considera una planta, pero en realidad es una hierba");
+  if (palabraAleatoria === "manzana" && fallos >= 3)$("#pista").html("Pista: su es forma redonda y sabor muy dulce");
+  if (palabraAleatoria === "caqui" && fallos >= 3)$("#pista").html("Pista: son ideal para desintoxicar el organismo");
+  if (palabraAleatoria === "uva" && fallos >= 3)$("#pista").html("Pista: ayuda para mantener una presión arterial saludable");
+  if (palabraAleatoria === "coco" && fallos >= 3)$("#pista").html("Pista: se puede beber su agua sin romper la cáscara");
+  if (palabraAleatoria === "maracuya" && fallos >= 3)$("#pista").html("Pista: su fruto es una baya");
+  if (palabraAleatoria === "marron" && fallos >= 3)$("#pista").html("Pista: se asocia frecuentemente con emociones desagradables");
+  if (palabraAleatoria === "rosa" && fallos >= 3)$("#pista").html("Pista: se asocia a la pantera");
+  if (palabraAleatoria === "turqueza" && fallos >= 3)$("#pista").html("Pista: se le conoce como verde azulado");
+  if (palabraAleatoria === "cian" && fallos >= 3)$("#pista").html("Pista: se deriva de un celeste saturado");
+  if (palabraAleatoria === "rojo" && fallos >= 3)$("#pista").html("Pista: color primario");
+  if (palabraAleatoria === "zafiro" && fallos >= 3)$("#pista").html("Pista: mineral");
+  if (palabraAleatoria === "mysql" && fallos >= 3)$("#pista").html("Pista: My Structured Query Language");
+  if (palabraAleatoria === "orientdb" && fallos >= 3)$("#pista").html("Pista: base de datos orientado a documentos");
+  if (palabraAleatoria === "couchdb" && fallos >= 3)$("#pista").html("Pista: se utiliza para facilitar la accesibilidad y compatibilidad web con una diversidad de dispositivos.");
+  if (palabraAleatoria === "mariadb" && fallos >= 3)$("#pista").html("Pista: se deriva de MySQL");
+  if (palabraAleatoria === "mongodb" && fallos >= 3)$("#pista").html("Pista: del inglés humongous, 'enorme'");
+  if (palabraAleatoria === "postgresql" && fallos >= 3)$("#pista").html("Pista:  también llamado Postgres");
+  if (palabraAleatoria === "firebird" && fallos >= 3)$("#pista").html("Pista:  pájaro de fuego");
+  if (palabraAleatoria === "oracle database" && fallos >= 3)$("#pista").html("Pista:  fundada por la empresa de consultoría Software Development Laboratories ");
+  if (palabraAleatoria === "inter systems cache" && fallos >= 3)$("#pista").html("Pista:  se utuliza para la gestión de grandes volúmenes de datos");
+  if (palabraAleatoria === "microsoft access" && fallos >= 3)$("#pista").html("Pista:  sucesor de Embedded Basic");
+  if (palabraAleatoria === "microsoft sql server" && fallos >= 3)$("#pista").html("Pista:  base de datos relacional producido por Microsoft");
+  if (palabraAleatoria === "html" && fallos >= 3)$("#pista").html("Pista:  Lenguaje de Marcas de Hipertexto");
+  if (palabraAleatoria === "css" && fallos >= 3)$("#pista").html("Pista:  hojas de estilo en cascada");
+  if (palabraAleatoria === "react" && fallos >= 3)$("#pista").html("Pista: sirve para crear interfaces de usuario interactivas de forma sencilla");
+  if (palabraAleatoria === "vue" && fallos >= 3)$("#pista").html("Pista: framework Javascript");
+  if (palabraAleatoria === "elm" && fallos >= 3)$("#pista").html("Pista: Los programas procesan HTML a través de un DOM virtual");
+  if (palabraAleatoria === "java script" && fallos >= 3)$("#pista").html("Pista: es un lenguaje de programación interpretado");
+  if (palabraAleatoria === "jquery" && fallos >= 3)$("#pista").html("Pista: consiste en un único fichero JavaScript que contiene las funcionalidades comunes de DOM");
+  if (palabraAleatoria === "type script" && fallos >= 3)$("#pista").html("Pista: su principal característica de Typescript es el tipado estático");
+  if (palabraAleatoria === "angular" && fallos >= 3)$("#pista").html("Pista:  framework desarrollado por Google");
+  if (palabraAleatoria === "sass" && fallos >= 3)$("#pista").html("Pista:  es un procesador CSS");
+  if (palabraAleatoria === "python" && fallos >= 3)$("#pista").html("Pista:  El emblema representa una imagen de serpientes de dos colores");
+  if (palabraAleatoria === "ruby" && fallos >= 3)$("#pista").html("Pista:  gema");
+  if (palabraAleatoria === "php" && fallos >= 3)$("#pista").html("Pista:   Hypertext Preprocessor");
+  if (palabraAleatoria === "perl" && fallos >= 3)$("#pista").html("Pista:  originalmente desarrollado para la manipulación de texto");
+  if (palabraAleatoria === "kotlin" && fallos >= 3)$("#pista").html("Pista:  es ideal para desarrollos basados en JVM");
+  if (palabraAleatoria === "scala" && fallos >= 3)$("#pista").html("Pista:  diseñado para expresar patrones comunes de programación en forma concisa");
+  if (palabraAleatoria === "open resty" && fallos >= 3)$("#pista").html("Pista:  fue originalmente un proyecto de empresa de Yahoo");
+  if (palabraAleatoria === "asp net" && fallos >= 3)$("#pista").html("Pista:  es un marco de desarrollo web que se utiliza para crear excelentes aplicaciones web");
+  if (palabraAleatoria === "visual basic" && fallos >= 3)$("#pista").html("Pista:  es un lenguaje orientado a objetivos");
+  if (palabraAleatoria === "assembly language" && fallos >= 3)$("#pista").html("Pista:  es un lenguaje de bajo nivel ");
+  if (palabraAleatoria === "java" && fallos >= 3)$("#pista").html("Pista:  comercializada por primera vez en 1995 por Sun Microsystems");
 }
 //funcion para ganar
 function gane() {
@@ -872,7 +744,6 @@ function perdida() {
   perdio = true;
 }
 function reiniciarJuego(){
-
   $("#pista").html("Aun no hay pistas disponibles...");
   mostrarLetra();
   palabraAleatorias();
@@ -985,10 +856,8 @@ function abandonarPartida(datos) {
   location.reload(true);
 }
 //Salir
-function salir() {
+function terminar() {
   location.reload(true);
- 
-
 }
 //mostrar un mensaje si se deja el campo vacio
 function mostrarError(error) {
@@ -1045,7 +914,6 @@ function tablaHTML() {
       <td>${canceladas} </td>
       <td>${contaAcertadas} </td>
       <td>${contaNoAcertadas} </td>
-      
     `;
     grilla.appendChild(row);
   });
