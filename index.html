@@ -16,6 +16,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="src/style/style.css" />
+    
     <title>Hangman Game</title>
 </head>
 
@@ -58,7 +59,7 @@
                                         </select>
                                     </div>
                                     <div class="col-lg-3 mb-2 animate__animated animate__fadeInDown animate__delay-2s">
-                                        <label class="form-label fw-bold">Dificultad:</label>
+                                        <label class="form-label fw-bold">Nivel:</label>
                                         <select class="form-select" aria-label="Default select example" id="dificultad">
                                             <option value="">Seleccione la dificultad</option>
                                             <option value="1">Facil</option>
@@ -313,7 +314,7 @@
                                             <h5 class="fw-bold text-purple">Tabla de clasificación</h5>
                                         </div>
                                         <div class="card-body tabla" id="grillaTabla">
-                                            <table class="table" id="grilla" onclick="ver(event);">
+                                            <table class="table" id="grilla"  ondblclick="ver(event);">
                                                 <tr class="bg-purple">
                                                     <th>Jugadores</th>
                                                     <th>Ganadas</th>
@@ -325,6 +326,9 @@
                                                 </tr>
                                                 <tbody></tbody>
                                             </table>
+                                           
+                                       
+
                                         </div>
                                     </div>
                                 </div>
@@ -380,6 +384,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
+       
 </body>
 
 </html>
