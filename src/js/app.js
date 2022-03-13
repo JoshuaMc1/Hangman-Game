@@ -267,6 +267,35 @@ function ocultarLetra() {
   if (letraUsuario === "n") document.getElementById("n").disabled = true;
   if (letraUsuario === "m") document.getElementById("m").disabled = true;
 }
+//funcion para desactivar la tecla presionada
+function desactivarLetra() {
+   document.getElementById("q").disabled = true;
+   document.getElementById("w").disabled = true;
+   document.getElementById("e").disabled = true;
+   document.getElementById("r").disabled = true;
+   document.getElementById("t").disabled = true;
+   document.getElementById("y").disabled = true;
+   document.getElementById("u").disabled = true;
+   document.getElementById("i").disabled = true;
+   document.getElementById("o").disabled = true;
+   document.getElementById("p").disabled = true;
+   document.getElementById("a").disabled = true;
+   document.getElementById("s").disabled = true;
+   document.getElementById("d").disabled = true;
+   document.getElementById("f").disabled = true;
+   document.getElementById("g").disabled = true;
+   document.getElementById("h").disabled = true;
+   document.getElementById("j").disabled = true;
+   document.getElementById("k").disabled = true;
+   document.getElementById("l").disabled = true;
+   document.getElementById("z").disabled = true;
+   document.getElementById("x").disabled = true;
+   document.getElementById("c").disabled = true;
+   document.getElementById("v").disabled = true;
+   document.getElementById("b").disabled = true;
+   document.getElementById("n").disabled = true;
+   document.getElementById("m").disabled = true;
+}
 //funcion para reiniciar las letras desactivadas
 function mostrarLetra() {
   document.getElementById("q").disabled = false;
@@ -440,7 +469,7 @@ function validarEleccion(temas, dificultad) {
   if (temas == "Frontend" && dificultad == "1")
     listaPalabras = ["html", "css", "react", "vue", "elm"];
   if (temas == "Frontend" && dificultad == "2")
-    listaPalabras = ["javascript", "typescript", "jquery", "angular", "sass"];
+    listaPalabras = ["java script", "type script", "jquery", "angular", "sass"];
   if (temas == "Backend" && dificultad == "1")
     listaPalabras = [
       "python",
@@ -452,7 +481,7 @@ function validarEleccion(temas, dificultad) {
       "scala",
     ];
   if (temas == "Backend" && dificultad == "2")
-    listaPalabras = ["open resty", "asp net", "opengse", "nodejs"];
+    listaPalabras = ["open resty", "asp net", "visual basic", "assembly language"];
   palabraAleatorias();
   generarEspacio();
 }
@@ -500,9 +529,9 @@ function generarEspacio() {
                     `,
       icon: "success",
     });
-    setTimeout(() => {
-      location.reload(true);
-    }, 3000);
+    desactivarLetra();
+    document.getElementById("abandonar").disabled = true;
+   
   }
   
   $("#resultado").html(html);
@@ -754,13 +783,13 @@ function seleccionarPista() {
     $("#pista").html(
       "Pista: Los programas procesan HTML a través de un DOM virtual"
     );
-  if (palabraAleatoria === "javascript" && fallos >= 3)
+  if (palabraAleatoria === "java script" && fallos >= 3)
     $("#pista").html("Pista: es un lenguaje de programación interpretado");
   if (palabraAleatoria === "jquery" && fallos >= 3)
     $("#pista").html(
       "Pista: consiste en un único fichero JavaScript que contiene las funcionalidades comunes de DOM"
     );
-  if (palabraAleatoria === "typescript" && fallos >= 3)
+  if (palabraAleatoria === "type script" && fallos >= 3)
     $("#pista").html(
       "Pista: su principal característica de Typescript es el tipado estático"
     );
@@ -794,13 +823,13 @@ function seleccionarPista() {
     $("#pista").html(
       "Pista:  es un marco de desarrollo web que se utiliza para crear excelentes aplicaciones web"
     );
-  if (palabraAleatoria === "opengse" && fallos >= 3)
+  if (palabraAleatoria === "visual basic" && fallos >= 3)
     $("#pista").html(
-      "Pista:  es una plataforma completa de aplicaciones geoespaciales"
+      "Pista:  es un lenguaje orientado a objetivos"
     );
-  if (palabraAleatoria === "nodejs" && fallos >= 3)
+  if (palabraAleatoria === "assembly language" && fallos >= 3)
     $("#pista").html(
-      "Pista:  es un entorno de tiempo de ejecución de JavaScript "
+      "Pista:  es un lenguaje de bajo nivel "
     );
   if (palabraAleatoria === "java" && fallos >= 3)
     $("#pista").html(
@@ -825,12 +854,7 @@ function gane() {
   verificarEstadoPartida();
   setTimeout(() => {
     contaFallida = 0;
-    $("#pista").html("Aun no hay pistas disponibles...");
-    palabraAleatorias();
-    generarEspacio();
-    mostrarLetra(this);
-
-    document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+    reiniciarJuego();
   }, 3000);
   mostrarPalabra("gane");
 }
@@ -842,14 +866,22 @@ function perdida() {
   verificarEstadoPartida();
   $("#imagen_ahorcado").attr("src", "src/img/ahorcado5.png");
   setTimeout(() => {
-    $("#pista").html("Aun no hay pistas disponibles...");
-    palabraAleatorias();
-    generarEspacio();
-    mostrarLetra(this);
-    document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+    reiniciarJuego();
   }, 3000);
   mostrarPalabra("perdida");
   perdio = true;
+}
+function reiniciarJuego(){
+
+  $("#pista").html("Aun no hay pistas disponibles...");
+  mostrarLetra();
+  palabraAleatorias();
+  generarEspacio();
+  numIntentos = 5;
+  $("#intentos").html(numIntentos);
+  document.querySelector("#imagen_ahorcado").src = "src/img/ahorcado0.png";
+  $("#historial").html("");
+  $("#acertadas").html("");
 }
 //validaciones y contadores de la tabla
 function verificarEstadoPartida() {
@@ -951,6 +983,12 @@ function abandonarPartida(datos) {
   estado = "abandonar";
   verificarEstadoPartida(estado);
   location.reload(true);
+}
+//Salir
+function salir() {
+  location.reload(true);
+ 
+
 }
 //mostrar un mensaje si se deja el campo vacio
 function mostrarError(error) {
